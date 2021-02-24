@@ -22,6 +22,11 @@ Route::get('/home', function () {
 });
 
 Route::prefix('categories')->group(function () {
+	//dùng list màn hình category
+	Route::get('/', [
+    	'as' => 'categories.index',
+    	'uses' => 'App\Http\Controllers\CategoryController@index'
+    ]);
     Route::get('/create', [
     	'as' => 'categories.create',
     	'uses' => 'App\Http\Controllers\CategoryController@create'
