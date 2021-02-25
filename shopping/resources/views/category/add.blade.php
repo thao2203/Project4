@@ -8,13 +8,11 @@
 @endsection
 
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Thêm'])
-    <!-- /.content-header -->
 
-    <!-- Main content -->
+  <div class="content-wrapper"> 
+
+    @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Thêm'])
+
     <div class="content">
       <div class="container-fluid">
         <div class="row">
@@ -40,11 +38,9 @@
             </form>
           </div>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </div>
-    <!-- /.content -->
+    
   </div>
-  <!-- /.content-wrapper -->
 @endsection
 

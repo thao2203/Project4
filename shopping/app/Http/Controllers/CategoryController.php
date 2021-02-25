@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -27,7 +30,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-    	return view('category.index');
+    	$categories = $this->category;
+    	$categories = DB::table('categories')->simplePaginate(5);
+    	return view( 'category.index', compact('categories'));
     }
 
     public function store(Request $request)
@@ -39,5 +44,15 @@ class CategoryController extends Controller
     	]);
 
     	return redirect()->route('categories.index');
+    }
+
+    public function edit($id)
+    {
+    	
+    }
+
+    public function delete($id)
+    {
+    	
     }
 }
