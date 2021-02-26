@@ -51,3 +51,19 @@ Route::prefix('categories')->group(function () {
     	'uses' => 'App\Http\Controllers\CategoryController@delete'
     ]);
 });
+
+Route::prefix('menus')->group(function () {
+	//dùng list màn hình category
+	Route::get('/', [
+    	'as' => 'menus.index',
+    	'uses' => 'App\Http\Controllers\MenuController@index'
+    ]);
+    Route::get('/create', [
+    	'as' => 'menus.create',
+    	'uses' => 'App\Http\Controllers\MenuController@create'
+    ]);
+    Route::post('/store', [
+    	'as' => 'menus.store',
+    	'uses' => 'App\Http\Controllers\MenuController@store'
+    ]);
+});
