@@ -22,16 +22,14 @@ class CategoryController extends Controller
     public function create()
     {
 
-    	$data = $this->category->all();//Lấy ra tất cả các data
-    	$recusive = new Recusive($data);
-    	$htmlOption = $recusive->categoryRecusive();
+    	$htmlOption = $this->getCategory($parentId = '');
     	return view('category.add', compact('htmlOption'));
     }
 
     public function index()
     {
     	$categories = $this->category;
-    	$categories = DB::table('categories')->simplePaginate(5);
+    	$categories = DB::table('categories')->latest()->simplePaginate(5);
     	return view( 'category.index', compact('categories'));
     }
 
@@ -46,9 +44,29 @@ class CategoryController extends Controller
     	return redirect()->route('categories.index');
     }
 
+    public function getCategory($parentId)
+    {
+   		$data = $this->category->all();//Lấy ra tất cả các data
+    	$recusive = new Recusive($data);
+    	$htmlOption = $recusive->categoryRecusive($parentId);
+    	return $htmlOption;
+    }
+
     public function edit($id)
     {
-    	
+    	$category = $this->category->find($id); //Lấy danh mục theo id
+ 		$htmlOption = $this->getCategory($category->parent_id);
+    	return view('category.edit', compact('category', 'htmlOption'));
+    }
+
+    public function update($id, Request $request)
+    {
+    	$this->category->find($id)->update([
+    		'name' => $request->name,
+    		'parent_id' => $request->parent_id,
+    		'slug' => Str::slug($request->name)
+    	]);
+    	return redirect()->route('categories.index');
     }
 
     public function delete($id)
