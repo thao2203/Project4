@@ -29,8 +29,9 @@ class CategoryController extends Controller
     public function index()
     {
     	$categories = $this->category;
-    	$categories = DB::table('categories')->latest()->simplePaginate(5);
-    	return view( 'category.index', compact('categories'));
+    	$categories = DB::table('categories')->where('deleted_at','=',NULL)->latest()->simplePaginate(5);
+    	return view( 'category.index', compact('categories'));	
+    		
     }
 
     public function store(Request $request)
@@ -70,7 +71,8 @@ class CategoryController extends Controller
     }
 
     public function delete($id)
-    {
-    	
+    {  	
+    	$this->category->find($id)->delete();
+    	return redirect()->route('categories.index');
     }
 }
