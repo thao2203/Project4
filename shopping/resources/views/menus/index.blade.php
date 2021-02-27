@@ -24,20 +24,31 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">Mã menu</th>
-                  <th scope="col">Tên menu</th>
+                  <th scope="col">Mã menus</th>
+                  <th scope="col">Tên menus</th>
                   <th scope="col">Hành động</th>
                 </tr>
               </thead>
               <tbody>
 
-                
+                @foreach($menus as $menu)
+
+                  <tr>
+                    <th scope="row">{{ $menu->id }}</th>
+                    <td>{{ $menu->name }}</td>
+                    <td>
+                      <a href="" class="btn btn-default"> Sửa </a>
+                      <a href="" class="btn btn-danger"> Xóa </a>
+                    </td>
+                  </tr>
+
+                @endforeach
 
               </tbody>
             </table>
           </div>
           <div class="col-md-12">
-            
+            {{ $menus->links() }}
           </div>
         </div>
       </div>
