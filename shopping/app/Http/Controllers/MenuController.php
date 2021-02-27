@@ -25,7 +25,7 @@ class MenuController extends Controller
     public function index()
     {
     	$menus = $this->menu;
-    	$menus = DB::table('menus')->latest()->simplePaginate(5);
+    	$menus = DB::table('menus')->where('deleted_at','=',NULL)->latest()->simplePaginate(5);
 
     	return view('menus.index', compact('menus'));
     }
@@ -60,6 +60,12 @@ class MenuController extends Controller
     		'parent_id' => $request->parent_id,
     		'slug' => Str::slug($request->name)
     	]);
+    	return redirect()->route('menus.index');
+    }
+
+    public function delete($id)
+    {
+    	$this->menu->find($id)->delete();
     	return redirect()->route('menus.index');
     }
 }
