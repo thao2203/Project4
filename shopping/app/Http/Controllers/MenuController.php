@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Components\MenuRecusive;
 use App\Models\Menu;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
@@ -39,7 +40,8 @@ class MenuController extends Controller
     {
     	$this->menu->create([
     		'name' => $request->name,
-    		'parent_id' => $request->parent_id
+    		'parent_id' => $request->parent_id,
+    		'slug' => Str::slug($request->name)
     	]);
     	return redirect()->route('menus.index');
     }
