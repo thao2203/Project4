@@ -52,4 +52,14 @@ class MenuController extends Controller
     	$optionSelect = $this->menuRecusive->menuRecusiveEdit($menuFollowIdEdit->parent_id);
     	return view('menus.edit', compact('optionSelect', 'menuFollowIdEdit'));
     }
+
+    public function update($id, Request $request)
+    {
+    	$this->menu->find($id)->update([
+    		'name' => $request->name,
+    		'parent_id' => $request->parent_id,
+    		'slug' => Str::slug($request->name)
+    	]);
+    	return redirect()->route('menus.index');
+    }
 }

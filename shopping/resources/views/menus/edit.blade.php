@@ -17,7 +17,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
-            <form action="{{ route('menus.store') }}" 
+            <form action="{{ route('menus.update', ['id' => $menuFollowIdEdit->id ]) }}" 
                   method="post">
               @csrf
               <div class="form-group">
