@@ -82,5 +82,15 @@ Route::prefix('admin')->group(function () {
 	    	'uses' => 'App\Http\Controllers\MenuController@delete'
 	    ]);
 	});
+
+	//PRODUCT
+	Route::prefix('product')->group(function () {
+		//dùng list màn hình product
+		Route::get('/', [
+	    	'as' => 'product.index',
+	    	'uses' => 'App\Http\Controllers\AdminProductController@index'
+	    ]);
+	    
+	});
 });
 
