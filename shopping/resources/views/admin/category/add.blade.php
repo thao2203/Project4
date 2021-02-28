@@ -4,7 +4,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Trang chủ</title>
+  <title>Thêm danh mục</title>
 @endsection
 
 @section('content')
