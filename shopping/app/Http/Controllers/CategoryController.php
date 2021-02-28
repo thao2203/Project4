@@ -23,14 +23,14 @@ class CategoryController extends Controller
     {
 
     	$htmlOption = $this->getCategory($parentId = '');
-    	return view('category.add', compact('htmlOption'));
+    	return view('admin.category.add', compact('htmlOption'));
     }
 
     public function index()
     {
     	$categories = $this->category;
     	$categories = DB::table('categories')->where('deleted_at','=',NULL)->latest()->simplePaginate(5);
-    	return view( 'category.index', compact('categories'));	
+    	return view( 'admin.category.index', compact('categories'));	
     		
     }
 
@@ -57,7 +57,7 @@ class CategoryController extends Controller
     {
     	$category = $this->category->find($id); //Lấy danh mục theo id
  		$htmlOption = $this->getCategory($category->parent_id);
-    	return view('category.edit', compact('category', 'htmlOption'));
+    	return view('admin.category.edit', compact('category', 'htmlOption'));
     }
 
     public function update($id, Request $request)
