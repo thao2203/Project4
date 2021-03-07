@@ -30,6 +30,7 @@ return [
 
     'disks' => [
 
+        //tất cả file upload sẽ đc trỏ tới storage -> app
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
