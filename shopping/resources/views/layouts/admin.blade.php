@@ -16,23 +16,23 @@
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  @include('partials.header')
+    @include('partials.header')
 
-  @include('partials.siderbar')
+    @include('partials.siderbar')
 
-  @yield('content')
+    @yield('content')
 
-  @include('partials.footer')
+    @include('partials.footer')
 
-</div>
-<!-- jQuery -->
-<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
-@yield('js')
+  </div>
+  <!-- jQuery -->
+  <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+  @yield('js')
 </body>
 </html>
