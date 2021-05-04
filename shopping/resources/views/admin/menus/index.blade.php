@@ -1,59 +1,82 @@
-
 <!-- resources/views/child.blade.php -->
 <!--Gọi đến view này load toàn bộ file layouts.admin -> load hết header footer siderbar và đưa content vào -->
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý menus</title>
+<title>Quản lý menus</title>
 @endsection
 
 @section('content')
 
-  <div class="content-wrapper">
+<div class="content-wrapper">
 
-    @include('partials.content-header', ['name' => 'menus', 'key' => 'Danh sách'])
+  <!-- @include('partials.content-header', ['name' => 'menus', 'key' => 'Danh sách']) -->
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Danh sách menus</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Danh sách menus</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Danh sách menus</h3>
+          <a style="margin-left: 20px;" href="{{ route('menus.create') }}" class="btn btn-warning">Thêm mới</a>
+        </div>
+        @if (session('status'))
+        <p class="text-warning" style="margin:0px;padding:0px;margin-left:20px">
+          {{ session('status') }}
+        </p>
+        @endif
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Tên menus</th>
+                <th>Ngày tạo</th>
+                <th style="width: 16%;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
 
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <a href="{{ route('menus.create' )}}" class="btn btn-success float-right m-2">Thêm</a>
-          </div>
+              @foreach($menus as $menu)
 
-          <div class="col-md-12">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Mã menus</th>
-                  <th scope="col">Tên menus</th>
-                  <th scope="col">Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
+              <tr>
+                <td>{{ $menu->name }}</td>
+                <td>{{ $menu->created_at }}</td>
+                <td>
+                  <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-success"> Sửa </a>
+                  <a href="{{ route('menus.delete', ['id' => $menu->id]) }}" class="btn btn-danger"> Xóa </a>
+                </td>
+              </tr>
 
-                @foreach($menus as $menu)
+              @endforeach
 
-                  <tr>
-                    <th scope="row">{{ $menu->id }}</th>
-                    <td>{{ $menu->name }}</td>
-                    <td>
-                      <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-default"> Sửa </a>
-                      <a href="{{ route('menus.delete', ['id' => $menu->id]) }}" class="btn btn-danger"> Xóa </a>
-                    </td>
-                  </tr>
-
-                @endforeach
-
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            {{ $menus->links() }}
-          </div>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Tên menus</th>
+                <th>Ngày tạo</th>
+                <th style="width: 12%;">Thao tác</th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
     </div>
-    
   </div>
-@endsection
 
+</div>
+@endsection

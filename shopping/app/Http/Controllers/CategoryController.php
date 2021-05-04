@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
@@ -19,6 +18,13 @@ class CategoryController extends Controller
 		//Gán biến category = insitant của 1 'Category $category' để sd các phương thức ở trong categoryModel
 		$this->category = $category;
 	}
+	public function getCategory($parentId)
+    {
+   		$data = $this->category->all();//Lấy ra tất cả các data
+    	$recusive = new Recusive($data);
+    	$htmlOption = $recusive->categoryRecusive($parentId);
+    	return $htmlOption;
+    }
     public function create()
     {
 
@@ -28,10 +34,8 @@ class CategoryController extends Controller
 
     public function index()
     {
-    	$categories = $this->category;
-    	$categories = DB::table('categories')->where('deleted_at','=',NULL)->latest()->simplePaginate(5);
-    	return view( 'admin.category.index', compact('categories'));	
-    		
+    	$categories = $this->category->where('deleted_at','=',NULL)->get();
+    	return view( 'admin.category.index', compact('categories'));	   		
     }
 
     public function store(Request $request)
@@ -45,13 +49,7 @@ class CategoryController extends Controller
     	return redirect()->route('categories.index');
     }
 
-    public function getCategory($parentId)
-    {
-   		$data = $this->category->all();//Lấy ra tất cả các data
-    	$recusive = new Recusive($data);
-    	$htmlOption = $recusive->categoryRecusive($parentId);
-    	return $htmlOption;
-    }
+    
 
     public function edit($id)
     {

@@ -1,59 +1,79 @@
-
 <!-- resources/views/child.blade.php -->
 <!--Gọi đến view này load toàn bộ file layouts.admin -> load hết header footer siderbar và đưa content vào -->
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý danh mục</title>
+<title>Quản lý danh mục</title>
 @endsection
 
 @section('content')
-
-  <div class="content-wrapper">
-
-    @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Danh sách'])
-
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <a href="{{ route('categories.create') }}" class="btn btn-success float-right m-2">Thêm</a>
-          </div>
-
-          <div class="col-md-12">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Mã danh mục</th>
-                  <th scope="col">Tên danh mục</th>
-                  <th scope="col">Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                @foreach($categories as $category)
-
-                  <tr>
-                    <th scope="row">{{ $category->id }}</th>
-                    <td>{{ $category->name }}</td>
-                    <td>
-                      <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-default"> Sửa </a>
-                      <a href="{{ route('categories.delete', ['id' => $category->id]) }}" class="btn btn-danger"> Xóa </a>
-                    </td>
-                  </tr>
-
-                @endforeach
-
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-            {{ $categories->links() }}
-          </div>
-        </div>
-      </div>
-    </div>
-    
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Danh sách danh mục</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Danh sách danh mục</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
   </div>
-@endsection
+  <!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Danh sách danh mục</h3>
+          <a style="margin-left: 20px;" href="{{ route('categories.create') }}" class="btn btn-warning">Thêm mới</a>
+        </div>
+        @if (session('status'))
+        <p class="text-warning" style="margin:0px;padding:0px;margin-left:20px">
+          {{ session('status') }}
+        </p>
+        @endif
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Tên danh mục</th>
+                <!-- <th>SEO</th> -->
+                <th>Ngày tạo</th>
+                <th style="width: 12%;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($categories as $category)
+              <tr>
+                <td>{{ $category->name }}</td>
+                <td>{{ $category->created_at }}</td>
+                <td>
+                  <a href="{{ route('categories.edit',['id' => $category->id]) }}" class="btn btn-sm btn-success">Sửa</a>
+                  <a href="{{ route('categories.delete',['id' => $category->id]) }}" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Tên danh mục</th>
+                <th>Ngày tạo</th>
+                <th style="width: 12%;">Thao tác</th>
+              </tr>
+            </tfoot>
+          </table>
 
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+@endsection

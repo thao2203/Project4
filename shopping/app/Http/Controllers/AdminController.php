@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +10,7 @@ class AdminController extends Controller
     public function loginAdmin()
     {
 
-    	// dd(bcrypt('thaoxingai')); //bcrypt tạo password mã hóa
+    	//dd(bcrypt('thaoxingai')); //bcrypt tạo password mã hóa
     	if(auth()->check())
     	{
     		return redirect()->to('home');

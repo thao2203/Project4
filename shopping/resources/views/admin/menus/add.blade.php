@@ -1,31 +1,30 @@
-
 <!-- resources/views/child.blade.php -->
 <!--Gọi đến view này load toàn bộ file layouts.admin -> load hết header footer siderbar và đưa content vào -->
 @extends('layouts.admin')
 
 @section('title')
-  <title>Thêm menus</title>
+<title>Thêm menus</title>
 @endsection
 
 @section('content')
 
-  <div class="content-wrapper"> 
+<div class="content-wrapper">
 
-    @include('partials.content-header', ['name' => 'menus', 'key' => 'Thêm'])
+  @include('partials.content-header', ['name' => 'menus', 'key' => 'Thêm'])
 
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <form action="{{ route('menus.store') }}" 
-                  method="post">
-              @csrf
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Thêm mới danh mục</h3>
+        </div>
+        <div class="card-body">
+          <form action="{{ route('menus.store') }}" method="post">
+            @csrf
+            <div class="cart-body">
               <div class="form-group">
                 <label>Tên menus</label>
-                <input type="text"
-                       class="form-control" 
-                       name='name'
-                       placeholder="Nhập tên menus">
+                <input type="text" class="form-control" name='name' placeholder="Nhập tên menus">
               </div>
               <div class="form-group">
                 <label>Chọn menus cha</label>
@@ -34,13 +33,20 @@
                   {!! $optionSelect !!}
                 </select>
               </div>
+            </div>
+            <div>
               <button type="submit" class="btn btn-primary">Hoàn thành</button>
-            </form>
-          </div>
+            </div>
+          </form>
+          @if (session('status'))
+					<p class="text-warning" style="margin:0px;padding:0px">
+						{{ session('status') }}
+					</p>
+					@endif
         </div>
       </div>
     </div>
-    
   </div>
-@endsection
 
+</div>
+@endsection

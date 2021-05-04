@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\MenuController;
 use App\Components\MenuRecusive;
 use App\Models\Menu;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +23,7 @@ class MenuController extends Controller
 
     public function index()
     {
-    	$menus = $this->menu;
-    	$menus = DB::table('menus')->where('deleted_at','=',NULL)->latest()->simplePaginate(5);
+    	$menus = $this->menu->where('deleted_at','=',NULL)->get();
 
     	return view('admin.menus.index', compact('menus'));
     }

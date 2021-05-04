@@ -4,7 +4,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Chỉnh sửa menu</title>
+  <title>Chỉnh sửa menus</title>
 @endsection
 
 @section('content')

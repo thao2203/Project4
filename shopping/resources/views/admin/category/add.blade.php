@@ -1,46 +1,54 @@
-
 <!-- resources/views/child.blade.php -->
 <!--Gọi đến view này load toàn bộ file layouts.admin -> load hết header footer siderbar và đưa content vào -->
 @extends('layouts.admin')
 
 @section('title')
-  <title>Thêm danh mục</title>
+<title>Thêm danh mục</title>
 @endsection
 
 @section('content')
 
-  <div class="content-wrapper"> 
+<div class="content-wrapper">
 
-    @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Thêm'])
+	@include('partials.content-header', ['name' => 'danh mục', 'key' => 'Thêm'])
 
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <form action="{{ route('categories.store') }}" 
-                  method="post">
-              @csrf
-              <div class="form-group">
-                <label>Tên danh mục</label>
-                <input type="text"
-                       class="form-control" 
-                       name='name'
-                       placeholder="Nhập tên danh mục">
-              </div>
-              <div class="form-group">
-                <label>Chọn danh mục cha</label>
-                <select class="form-control" name="parent_id">
-                  <option value="0">Chọn danh mục cha</option>
-                  {!! $htmlOption !!}
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </div>
+	<div class="content">
+		<div class="container-fluid">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Thêm mới danh mục</h3>
+				</div>
+				<div class="card-body">
+					<form role="form" action="{{ route('categories.store') }}" method="post">
+						@csrf
+						<div class="card-body" style="padding: 0px;">
+							<div class="form-group">
+								<label>Tên danh mục</label>
+								<input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục">
+							</div>
+							<div class="form-group">
+								<label>Danh mục gốc</label>
+								<select class="form-control" name="parentId">
+									<option value="0">Chọn danh mục gốc</option>
+									{!! $htmlOption !!}
+								</select>
+							</div>
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary">Thêm mới danh mục</button>
+							<a href="{{ route('categories.index') }}" class="btn btn-default">Quay lại</a>
+						</div>
+					</form>
+					@if (session('status'))
+					<p class="text-warning" style="margin:0px;padding:0px">
+						{{ session('status') }}
+					</p>
+					@endif
+				</div>
+				<!-- /.card-body -->
+			</div>
+		</div><!-- /.container-fluid -->
+	</div>
+
+</div>
 @endsection
-

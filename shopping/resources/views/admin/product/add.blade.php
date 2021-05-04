@@ -84,6 +84,6 @@
 
 @section('js')
   <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
-  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script src="{{ asset('cdn.tinymce.com/4/tinymce.min.js') }}"></script>
   <script src="{{ asset('admins/product/add/add.js') }}"></script>
 @endsection

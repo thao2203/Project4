@@ -12,13 +12,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', action:'App\Http\Controllers\HomeController@index');
 
 Route::get('admin', 'App\Http\Controllers\AdminController@loginAdmin');
 
 Route::post('admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
 
 Route::get('/home', function () {
-    return view('home');
+	if(!auth()->check())
+    	{
+    		return redirect()->to('admin');
+    	}
+    return view('home.home');
 });
 
 Route::prefix('admin')->group(function () {
