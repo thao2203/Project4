@@ -1,67 +1,92 @@
-
 <!-- resources/views/child.blade.php -->
 <!--Gọi đến view này load toàn bộ file layouts.admin -> load hết header footer siderbar và đưa content vào -->
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý sản phẩm</title>
+<title>Quản lý sản phẩm</title>
 @endsection
 
 @section('content')
 
-  <div class="content-wrapper">
+<div class="content-wrapper">
 
-    @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Danh sách'])
+  <!-- @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Danh sách']) -->
 
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <a href="{{ route('product.create') }}" class="btn btn-success float-right m-2">Thêm</a>
-          </div>
-
-          <div class="col-md-12">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Mã sản phẩm</th>
-                  <th scope="col">Tên sản phẩm</th>
-                  <th scope="col">Giá</th>
-                  <th scope="col">Hình ảnh</th>
-                  <th scope="col">Danh mục</th>
-                  <th scope="col">Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-
-             
-
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Ghế có tựa</td>
-                    <td>220.000</td>
-                    <td>
-                      <img src="" alt="">
-                    </td>
-                    <td>Ghế xinh</td>
-                    <td>
-                      <a href="" class="btn btn-default"> Sửa </a>
-                      <a href="" class="btn btn-danger"> Xóa </a>
-                    </td>
-                  </tr>
-
-                
-
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-12">
-           
-          </div>
-        </div>
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Danh sách sản phẩm</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/home">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+          </ol>
+        </div><!-- /.col -->
+        <!-- <div class="col-md-12">
+              <a href="{{ route('product.create') }}" class="btn btn-success float-right m-2">Thêm</a>
+            </div> -->
       </div>
     </div>
-    
   </div>
-@endsection
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Danh sách sản phẩm</h3>
+          <a style="margin-left: 20px;" href="{{ route('product.create') }}" class="btn btn-warning">Thêm mới</a>
+        </div>
+        @if (session('status'))
+        <p class="text-warning" style="margin:0px;padding:0px;margin-left:20px">
+          {{ session('status') }}
+        </p>
+        @endif
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Hình Ảnh</th>
+                <th>Ngày tạo</th>
+                <th style="width: 12%;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($products as $product)
+              <tr>
+                <td>{{ $product->name }}</td>
+                <td>{{ number_format($product->price, 0) }}</td>
+                <td><img src="{{url('/images/'.$product->feature_image_path)}}" style="width:100px;height:150px" alt=""></td>
+                <td>{{ date("d-m-Y", strtotime($product->created_at)) }}</td>
+                <td>
+                  <a href="{{ route('product.edit',['id' => $product->id]) }}" class="btn btn-sm btn-success">Sửa</a>
+                  <a href="{{ route('product.delete',['id' => $product->id]) }}" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Hình Ảnh</th>
+                <th>Ngày tạo</th>
+                <th style="width: 12%;">Thao tác</th>
+              </tr>
+            </tfoot>
+          </table>
 
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div><!-- /.container-fluid -->
+  </div>
+
+
+</div>
+
+</div>
+@endsection

@@ -3,39 +3,39 @@
 @extends('layouts.admin')
 
 @section('title')
-<title>Chỉnh sửa danh mục</title>
+<title>Chỉnh sửa loại sản phẩm</title>
 @endsection
 
 @section('content')
 
 <div class="content-wrapper">
 
-  @include('partials.content-header', ['name' => 'danh mục', 'key' => 'Sửa'])
+  @include('partials.content-header', ['name' => 'loại sản phẩm', 'key' => 'Sửa'])
 
   <div class="content">
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Cập nhật danh mục</h3>
+          <h3 class="card-title">Cập nhật loại sản phẩm</h3>
         </div>
         <div class="card-body">
           <form role="form" action="{{ route('categories.update',['id' => $category->id]) }}" method="post">
             @csrf
             <div class="card-body" style="padding: 0px;">
               <div class="form-group">
-                <label>Tên danh mục</label>
-                <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục" value="{{ $category -> name }}">
+                <label>Tên loại sản phẩm</label>
+                <input type="text" name="name" class="form-control" placeholder="Nhập tên loại sản phẩm" value="{{ $category -> name }}">
               </div>
               <div class="form-group">
-                <label>Danh mục gốc</label>
+                <label>Loại sản phẩm gốc</label>
                 <select class="form-control" name="parentId">
-                  <option value="0">Chọn danh mục gốc</option>
+                  <option value="0">Chọn loại sản phẩm gốc</option>
                   {!! $htmlOption !!}
                 </select>
               </div>
             </div>
             <div>
-              <button type="submit" class="btn btn-primary">Cập nhật danh mục</button>
+              <button type="submit" class="btn btn-primary">Cập nhật loại sản phẩm</button>
               <a href="{{ route('categories.index') }}" class="btn btn-default">Quay lại</a>
             </div>
           </form>

@@ -40,9 +40,10 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+		
     	$this->category->create([
     		'name' => $request->name,
-    		'parent_id' => $request->parent_id,
+    		'parent_id' => $request->parentId,//sai tên input beên view bên view k có shiìift trừ
     		'slug' => Str::slug($request->name)
     	]);
 
