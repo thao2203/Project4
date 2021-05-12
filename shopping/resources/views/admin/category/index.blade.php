@@ -42,6 +42,7 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
+                <th>STT</th>
                 <th>Tên loại sản phẩm</th>
                 <!-- <th>SEO</th> -->
                 <th>Ngày tạo</th>
@@ -51,6 +52,7 @@
             <tbody>
               @foreach($categories as $category)
               <tr>
+                <td>{{ $loop->index+1 }}</td>
                 <td>{{ $category->name }}</td>
                 <td>{{ date("d-m-Y", strtotime($category->created_at)) }}</td>
                 <td>
@@ -62,6 +64,7 @@
             </tbody>
             <tfoot>
               <tr>
+                <th>STT</th>
                 <th>Tên loại sản phẩm</th>
                 <th>Ngày tạo</th>
                 <th style="width: 12%;">Thao tác</th>
@@ -76,4 +79,27 @@
   </div>
   <!-- /.content -->
 </div>
+<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+  $(function() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
+      },
+      "ordering": false,
+    });
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 @endsection

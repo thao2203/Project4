@@ -1,6 +1,8 @@
 <?php
 namespace App\Components;
 
+use Illuminate\Support\Facades\DB;
+
 class Recusive
 {
 	private $data;
@@ -27,6 +29,25 @@ class Recusive
     			
     			$this->categoryRecusive($parentId, $value['id'], $text. '--');	
     		}
+    	}
+
+		return $this->htmlSelect;    				
+    }
+
+	public function categoryRecusiveSupplier($supplierid)
+    {
+		
+    	foreach ($this->data as $value) 
+    	{
+    		if ($supplierid == $value['ID'])
+    		{
+    			$this->htmlSelect .= "<option selected value='" . $value['ID'] . "'>" .$value['Name']. "</option>";
+				
+    		}
+			else{
+				$this->htmlSelect .= "<option value='" . $value['ID'] . "'>" .$value['Name']. "</option>";
+				
+			}
     	}
 
 		return $this->htmlSelect;    				
@@ -59,11 +80,10 @@ class Recusive
     			
     			$this->categoryRecusiveUpdate($parentId, $value['id'], $text. '--');	
     		}
+			
     	}
 
 		return $this->htmlSelect;    				
     }
 
 }
-
-?>

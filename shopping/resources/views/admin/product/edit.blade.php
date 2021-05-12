@@ -48,8 +48,19 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Chọn nhà cung cấp</label>
+                            <select class="form-control" name="supplier_id">
+                            <option value="0">Chọn nhà cung cấp</option>
+                                {!! $htmlSupplier !!}
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Nhập nội dung</label>
                             <textarea name="content" class="form-control tinymce_editor_init" rows="8">{{ $product -> content }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nhập số lượng</label>
+                            <input type="text" class="form-control" name='quantity' value="{{ $product -> quantity }}" placeholder="Nhập số lượng sản phẩm"></input>
                         </div>
                         <button type="submit" class="btn btn-primary">Hoàn thành</button>
                     </form>

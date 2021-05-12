@@ -35,14 +35,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('menus.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Quản lý Menus
-              </p>
-            </a>
-          </li>
+          
           <li class="nav-item">
             <a href="{{ route('product.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -51,7 +44,46 @@
               </p>
             </a>
           </li>
-          
+          <li class="nav-item">
+            <a href="{{ route('menus.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+              Quản lý tin tức
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('product.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý nhà cung cấp
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('product.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý hóa đơn nhập
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('product.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý đơn hàng
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('product.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Thống Kê
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

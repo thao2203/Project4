@@ -47,9 +47,11 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
+                <th>STT</th>
                 <th>Tên sản phẩm</th>
                 <th>Đơn giá</th>
                 <th>Hình Ảnh</th>
+                <th>Số lượng còn</th>
                 <th>Ngày tạo</th>
                 <th style="width: 12%;">Thao tác</th>
               </tr>
@@ -57,9 +59,11 @@
             <tbody>
               @foreach($products as $product)
               <tr>
+                <td>{{ $loop->index+1 }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ number_format($product->price, 0) }}</td>
                 <td><img src="{{url('/images/'.$product->feature_image_path)}}" style="width:100px;height:150px" alt=""></td>
+                <td>{{ $product->quantity }}</td>
                 <td>{{ date("d-m-Y", strtotime($product->created_at)) }}</td>
                 <td>
                   <a href="{{ route('product.edit',['id' => $product->id]) }}" class="btn btn-sm btn-success">Sửa</a>
@@ -70,9 +74,11 @@
             </tbody>
             <tfoot>
               <tr>
+                <th>STT</th>
                 <th>Tên sản phẩm</th>
                 <th>Đơn giá</th>
                 <th>Hình Ảnh</th>
+                <th>Số lượng còn</th>
                 <th>Ngày tạo</th>
                 <th style="width: 12%;">Thao tác</th>
               </tr>
@@ -89,4 +95,27 @@
 </div>
 
 </div>
+<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+  $(function() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
+      },
+      "ordering": false,
+    });
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 @endsection

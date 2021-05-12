@@ -23,8 +23,12 @@ Route::get('/home', function () {
     	{
     		return redirect()->to('admin');
     	}
-    return view('home.home');
+    return view('login');
 });
+
+Route::get('/{id}', 'App\Http\Controllers\HomeController@detail');
+
+
 
 Route::prefix('admin')->group(function () {
 	Route::prefix('categories')->group(function () {

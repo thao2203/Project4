@@ -79,4 +79,27 @@
   </div>
 
 </div>
+<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+  $(function() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
+      },
+      "ordering": false,
+    });
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+  </script>
 @endsection

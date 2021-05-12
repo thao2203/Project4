@@ -7,7 +7,7 @@
                              <!-- Start Header Logo -->
                             <div class="header-logo">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{asset('assets/images/logo/logo_black.png')}}" alt=""></a>
+                                    <a href="index.html"><img src="assets/images/logo/logo_black.png" alt=""></a>
                                 </div>
                             </div>
                             <!-- End Header Logo -->
@@ -17,7 +17,7 @@
                                 <nav>
                                     <ul>
                                         <li class="has-dropdown">
-                                            <a class="active main-menu-link" href="index.html">Home <i class="fa fa-angle-down"></i></a>
+                                            <a class="active main-menu-link" href="index.html">Trang chủ <i class="fa fa-angle-down"></i></a>
                                             <!-- Sub Menu -->
                                             <ul class="sub-menu">
                                                 <li><a href="index.html">Home 1</a></li>
@@ -27,7 +27,7 @@
                                             </ul>
                                         </li>
                                         <li class="has-dropdown has-megaitem">
-                                            <a href="product-details-default.html">Shop <i class="fa fa-angle-down"></i></a>
+                                            <a href="product-details-default.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                             <!-- Mega Menu -->
                                             <div class="mega-menu">
                                                 <ul class="mega-menu-inner">
@@ -81,13 +81,13 @@
                                                 </ul>
                                                 <div class="menu-banner">
                                                     <a href="#" class="menu-banner-link">
-                                                        <img class="menu-banner-img" src="{{asset('assets/images/banner/menu-banner.jpg')}}" alt="">
+                                                        <img class="menu-banner-img" src="assets/images/banner/menu-banner.jpg" alt="">
                                                     </a>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="has-dropdown">
-                                            <a href="blog-single-sidebar-left.html">Blog <i class="fa fa-angle-down"></i></a>
+                                            <a href="blog-single-sidebar-left.html">Bài viết <i class="fa fa-angle-down"></i></a>
                                             <!-- Sub Menu -->
                                             <ul class="sub-menu">
                                                 <li><a href="blog-grid-sidebar-left.html">Blog Grid Sidebar left</a></li>
@@ -99,20 +99,20 @@
                                                 <li><a href="blog-single-sidebar-right.html">Blog Single Sidebar Right</a></li>
                                             </ul>
                                         </li>
-                                        <li class="has-dropdown">
+                                        <!-- <li class="has-dropdown">
                                             <a href="#">Pages <i class="fa fa-angle-down"></i></a>
-                                            <!-- Sub Menu -->
+                                            
                                             <ul class="sub-menu">
                                                 <li><a href="faq.html">Frequently Questions</a></li>
                                                 <li><a href="privacy-policy.html">Privacy Policy</a></li>
                                                 <li><a href="404.html">404 Page</a></li>
                                             </ul>
+                                        </li> -->
+                                        <li>
+                                            <a href="about-us.html">Về chúng tôi</a>
                                         </li>
                                         <li>
-                                            <a href="about-us.html">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="contact-us.html">Contact Us</a>
+                                            <a href="contact-us.html">Liên hệ</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -138,11 +138,11 @@
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
                                         <i class="icon-menu"></i>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                             <!-- End Header Action Link -->
                         </div>

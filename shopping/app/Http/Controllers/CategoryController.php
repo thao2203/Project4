@@ -29,12 +29,13 @@ class CategoryController extends Controller
     {
 
     	$htmlOption = $this->getCategory($parentId = '');
+		
     	return view('admin.category.add', compact('htmlOption'));
     }
 
     public function index()
     {
-    	$categories = $this->category->where('deleted_at','=',NULL)->get();
+    	$categories = $this->category->where('deleted_at','=',NULL)->orderBy('created_at', 'desc')->get();
     	return view( 'admin.category.index', compact('categories'));	   		
     }
 

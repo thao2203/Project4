@@ -43,28 +43,6 @@
 
   <!-- AdminLTE App -->
   <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
-  
-  <script>
-    $(function() {
-      $("#example1").DataTable({
-        "responsive": true,
-        "autoWidth": false,
-        language: {
-          url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
-        }
-      });
-      
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script>
   @yield('js')
 </body>
 
