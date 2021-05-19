@@ -44,7 +44,8 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Tên menus</th>
+                <th>STT</th>
+                <th>Tên tin</th>
                 <th>Ngày tạo</th>
                 <th style="width: 16%;">Thao tác</th>
               </tr>
@@ -54,8 +55,9 @@
               @foreach($menus as $menu)
 
               <tr>
+                <td>{{ $loop->index+1 }}</td>
                 <td>{{ $menu->name }}</td>
-                <td>{{ $menu->created_at }}</td>
+                <td> {{ date("d-m-Y", strtotime($menu->created_at)) }}</td>
                 <td>
                   <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-success"> Sửa </a>
                   <a href="{{ route('menus.delete', ['id' => $menu->id]) }}" class="btn btn-danger"> Xóa </a>
@@ -66,8 +68,9 @@
 
             </tbody>
             <tfoot>
-              <tr>
-                <th>Tên menus</th>
+              <tr> 
+                <th>STT</th>
+                <th>Tên tin</th>
                 <th>Ngày tạo</th>
                 <th style="width: 12%;">Thao tác</th>
               </tr>

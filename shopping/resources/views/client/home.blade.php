@@ -13,7 +13,7 @@
     <!-- Start Offcanvas Search Bar Section -->
     @include('partials.search')
     <!-- End Offcanvas Search Bar Section -->
-
+    @include('partials.login')
     <!-- Offcanvas Overlay -->
     <div class="offcanvas-overlay"></div>
 

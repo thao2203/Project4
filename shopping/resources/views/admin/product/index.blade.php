@@ -49,7 +49,7 @@
               <tr>
                 <th>STT</th>
                 <th>Tên sản phẩm</th>
-                <th>Đơn giá</th>
+                <th>Đơn giá (VNĐ)</th>
                 <th>Hình Ảnh</th>
                 <th>Số lượng còn</th>
                 <th>Ngày tạo</th>
@@ -76,7 +76,7 @@
               <tr>
                 <th>STT</th>
                 <th>Tên sản phẩm</th>
-                <th>Đơn giá</th>
+                <th>Đơn giá (VNĐ)</th>
                 <th>Hình Ảnh</th>
                 <th>Số lượng còn</th>
                 <th>Ngày tạo</th>

@@ -27,8 +27,14 @@
                                     <!-- Start Product Default Single Item -->
                                     @foreach($products as $product)                                   
                                     <div class="product-default-single-item product-color--golden swiper-slide">
+                                        <form action="">
+                                        <input type="hidden" value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
+                                        <input type="hidden" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
+                                        <input type="hidden" value="{{$product->feature_image_path}}" class="cart_product_image_{{$product->id}}">
+                                        <input type="hidden" value="{{$product->price}}" class="cart_product_price_{{$product->id}}">
+                                        <input type="hidden" value="1" class="cart_product_qty_{{$product->id}}">
                                         <div class="image-box">
-                                            <a href="/{{$product->id}}" class="image-link">
+                                            <a href="/detail/{{$product->id}}" class="image-link">
                                                 <img src="{{url('/images/'.$product->feature_image_path)}}" style="width:270px;height:300px" alt="">
                                                 <!-- <img src="{{asset('assets/images/product/default/home-1/default-2.jpg')}}" alt=""> -->
                                             </a>
@@ -37,7 +43,9 @@
                                             </div>
                                             <div class="action-link">
                                                 <div class="action-link-left">
-                                                    <a href="#" data-bs-toggle="modal" style="font-size: 11px;" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a>
+                                                     <button class="btn btn-block btn-lg btn-black-default-hover" type="button" data-id="{{$product->id}}" name="add-to-cart" >Thêm vào giỏ hàng</button>
+
+                                                    <!-- <a href="#" data-bs-toggle="modal" style="font-size: 11px;" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a> -->
                                                 </div>
                                                 <div class="action-link-right">
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
@@ -48,16 +56,18 @@
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
-                                                <h6 class="title"><a href="product-details-default.html">{{ $product->name }}</a></h6> <br>
-                                                <span class="price"   style="text-decoration: line-through;">{{ number_format($product->price, 0) }} vnđ</span>
+                                                <h6 class="title"><a href="/detail/{{$product->id}}">{{ $product->name }}</a></h6> <br>
+                                                <span class="price"   style="text-decoration: line-through;">{{ number_format($product->price, 0) }} VNĐ</span>
                                             </div>
                                             
                                             <div class="content-right">
                                             
-                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} vnđ</span>
+                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} VNĐ</span>
                                             </div>
 
                                         </div>
+                                        </form>
+                                        
                                     </div>
 
                                     @endforeach

@@ -48,13 +48,13 @@
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
-                                                <h6 class="title"><a href="product-details-default.html">{{ $product->name }}</a></h6> <br>
-                                                <span class="price"   style="text-decoration: line-through;">{{ number_format($product->price, 0) }} vnđ</span>
+                                                <h6 class="title"><a href="/detail/{{$product->id}}">{{ $product->name }}</a></h6> <br>
+                                                <span class="price"   style="text-decoration: line-through;">{{ number_format($product->price, 0) }} VNĐ</span>
                                             </div>
                                             
                                             <div class="content-right">
                                             
-                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} vnđ</span>
+                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} VNĐ</span>
                                             </div>
 
                                         </div>

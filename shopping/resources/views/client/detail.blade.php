@@ -466,7 +466,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="breadcrumb-title">{{ $detail_products[0] -> name }}</h3>
+                    <h3 class="breadcrumb-title">{{ $detail_products -> name }}</h3>
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>
@@ -493,7 +493,7 @@
                         <div class="swiper-wrapper">
 
                             <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive">
-                                <img src="{{url('/images/'.$detail_products[0]->feature_image_path)}}" alt="">
+                                <img src="{{url('/images/'.$detail_products->feature_image_path)}}" alt="">
                             </div>
 
                         </div>
@@ -532,8 +532,9 @@
                 <div class="product-details-content-area product-details--golden" data-aos="fade-up" data-aos-delay="200">
                     <!-- Start  Product Details Text Area-->
                     <div class="product-details-text">
-                        <h4 class="title">{{ $detail_products[0] -> name }}</h4>
-                        <h6 class="product-ref" style="padding-top: 0px;">Nhà cung cấp: <span>{{ $detail_products[0]->Name }}</span></h6>
+                        <input type="text" value="{{$detail_products->id}}" hidden>
+                        <h4 class="title">{{ $detail_products -> name }}</h4>
+                        <h6 class="product-ref" style="padding-top: 0px;">Nhà cung cấp: <span>{{ $detail_products->Name }}</span></h6>
                         <!-- <div class="d-flex align-items-center">
                                 <ul class="review-star">
                                     <li class="fill"><i class="ion-android-star"></i></li>
@@ -544,17 +545,18 @@
                                 </ul>
                                 <a href="#" class="customer-review ml-2">(customer review )</a>
                             </div> -->
-                        <div class="price" style="text-decoration: line-through; font-size: 14px;">{{ number_format($detail_products[0]->price, 0) }} vnđ</div>
-                        <div class="price" style="color:brown">{{ number_format($detail_products[0]->price-($detail_products[0]->price*10/100), 0) }} vnđ</div>
-                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p> -->
+                        <div class="price" style="text-decoration: line-through; font-size: 14px; margin-bottom: 0px;">{{ number_format($detail_products->price, 0) }} VNĐ</div>
+                        <div class="price" style="color:brown">{{ number_format($detail_products->price-($detail_products->price*10/100), 0) }} VNĐ</div>
+
                     </div> <!-- End  Product Details Text Area-->
                     <!-- Start Product Variable Area -->
                     <div class="product-details-variable" style="margin-top: 0px;padding-top:10px">
                         <h4 class="title">Số lượng kho:</h4>
                         <!-- Product Variable Single Item -->
                         <div class="variable-single-item">
-                            <div class="product-stock"> <span class="product-stock-in"><i class="ion-checkmark-circled"></i></span>{{ $detail_products[0]->quantity }} sản phẩm</div>
+                            <div class="product-stock"> <span class="product-stock-in" style="margin-right: 5px;"><i class="ion-checkmark-circled"></i></span>{{ $detail_products->quantity }} sản phẩm</div>
                         </div>
+                        <input type="text" hidden id="product_count" value="{{ $detail_products->quantity }}">
                         <!-- Product Variable Single Item -->
                         <!-- <div class="variable-single-item">
                                 <span>Color</span>
@@ -585,31 +587,39 @@
                                     </label>
                                 </div>
                             </div> -->
-
+                        <!-- <div class="variable-single-item">
+                                <span>Màu sắc :</span>
+                                <select class="product-variable-size">
+                                    <option selected value="1">Chọn màu sắc</option>
+                                    <option value="Đen">Đen</option>
+                                    <option value="Trắng">Trắng</option>
+                                    <option value="Đỏ">Đỏ</option>
+                                </select>
+                            </div> -->
                         <!-- Product Variable Single Item -->
                         <!-- <div class="variable-single-item">
-                                <span>Size</span>
+                                <span>Kích cỡ :</span>
                                 <select class="product-variable-size">
-                                    <option selected value="1"> size in option</option>
-                                    <option value="2">s</option>
-                                    <option value="3">m</option>
-                                    <option value="4">l</option>
-                                    <option value="5">xl</option>
-                                    <option value="6">xxl</option>
+                                    <option selected value="1">Chọn kích cỡ</option>
+                                    <option value="Lớn">Lớn</option>
+                                    <option value="Vừa">Vừa</option>
+                                    <option value="Nhỏ">Nhỏ</option>
                                 </select>
                             </div> -->
                         <!-- Product Variable Single Item -->
                         <div class="d-flex align-items-center ">
                             <div class="variable-single-item ">
-                                <span>Số lượng</span>
+                                <span>Số lượng: </span>
                                 <div class="product-variable-quantity">
-                                    <input min="1" max="100" value="1" type="number">
+                                    <input value="1" id="count" type="text">
                                 </div>
                             </div>
 
                             <div class="product-add-to-cart-btn">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">+ Thêm vào giỏ hàng</a>
+                                <!-- <a href="#" data-bs-toggle="modal"  class="btn btn-block btn-lg btn-black-default-hover" data-bs-target="#modalAddcart">+ Thêm vào giỏ hàng</a> -->
+                                <button class="btn btn-block btn-lg" data-id="{{$detail_products->id}}" type="button" id="add-to-cart">Thêm vào giỏ hàng</button>
                             </div>
+
                         </div>
                         <!-- Start  Product Details Meta Area-->
                         <!-- <div class="product-details-meta mb-20">
@@ -617,7 +627,8 @@
                                 <a href="compare.html" class="icon-space-right"><i class="icon-refresh"></i>Compare</a>
                             </div>  -->
                         <!-- End  Product Details Meta Area-->
-                    </div> <!-- End Product Variable Area -->
+                    </div>
+                    <!-- End Product Variable Area -->
 
                     <!-- Start  Product Details Catagories Area-->
                     <!-- <div class="product-details-catagory mb-2">
@@ -650,7 +661,7 @@
 </div> <!-- End Product Details Section -->
 
 <!-- Start Product Content Tab Section -->
-<div class="product-details-content-tab-section section-top-gap-100">
+<div class="product-details-content-tab-section section-top-gap-100" style="margin-top: 50px;">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -661,9 +672,9 @@
                         <li><a class="nav-link active" data-bs-toggle="tab" href="#description">
                                 Mô tả
                             </a></li>
-                        <li><a class="nav-link" data-bs-toggle="tab" href="#specification">
+                        <!-- <li><a class="nav-link" data-bs-toggle="tab" href="#specification">
                                 Chi tiết
-                            </a></li>
+                            </a></li> -->
                         <li><a class="nav-link" data-bs-toggle="tab" href="#review">
                                 Bình luận
                             </a></li>
@@ -675,12 +686,12 @@
                             <!-- Start Product Details Tab Content Singel -->
                             <div class="tab-pane active show" id="description">
                                 <div class="single-tab-content-item">
-                                    <p>{{ $detail_products[0] -> content }}</p>
+                                    <p>{{ $detail_products -> content }}</p>
 
                                 </div>
                             </div> <!-- End Product Details Tab Content Singel -->
                             <!-- Start Product Details Tab Content Singel -->
-                            <div class="tab-pane" id="specification">
+                            <!-- <div class="tab-pane" id="specification">
                                 <div class="single-tab-content-item">
                                     <table class="table table-bordered mb-20">
                                         <tbody>
@@ -699,7 +710,8 @@
                                     </table>
                                     <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
                                 </div>
-                            </div> <!-- End Product Details Tab Content Singel -->
+                            </div>  -->
+                            <!-- End Product Details Tab Content Singel -->
                             <!-- Start Product Details Tab Content Singel -->
                             <div class="tab-pane" id="review">
                                 <div class="single-tab-content-item">
@@ -832,7 +844,142 @@
 </div> <!-- End Product Content Tab Section -->
 
 <!-- Start Product Default Slider Section -->
-@include('partials.product-default-slider-section-category')
+<div class="product-default-slider-section section-top-gap-100 section-fluid" style="margin-top: 50px;">
+    <!-- Start Section Content Text Area -->
+    <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-content-gap">
+                        <div class="secton-content">
+                            <h3 class="section-title">SẢM PHẨM TƯƠNG TỰ
+                            </h3>
+                            <p>Duyệt qua bộ sưu tập các sản phẩm liên quan của chúng tôi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Section Content Text Area -->
+    <div class="product-wrapper" data-aos="fade-up" data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-slider-default-1row default-slider-nav-arrow">
+                        <!-- Slider main container -->
+                        <div class="swiper-container product-default-slider-4grid-1row">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- End Product Default Single Item -->
+                                <!-- Start Product Default Single Item -->
+                                @foreach($related_products as $key => $lienquan)
+                                <div class="product-default-single-item product-color--golden swiper-slide">
+                                    <div class="image-box">
+                                        <a href="/{{$lienquan->id}}" class="image-link">
+                                            <img src="{{url('/images/'.$lienquan->feature_image_path)}}" style="width:270px;height:300px" alt="">
+                                            <!-- <img src="{{asset('assets/images/product/default/home-1/default-2.jpg')}}" alt=""> -->
+                                        </a>
+                                        <div class="tag">
+                                            <span>Khuyến mại</span>
+                                        </div>
+                                        <div class="action-link">
+                                            <div class="action-link-left">
+                                                <a href="#" data-bs-toggle="modal" style="font-size: 11px;" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a>
+                                            </div>
+                                            <div class="action-link-right">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
+                                                <a href="wishlist.html"><i class="icon-heart"></i></a>
+                                                <a href="compare.html"><i class="icon-shuffle"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="content-left">
+                                            <h6 class="title"><a href="product-details-default.html">{{ $lienquan->name }}</a></h6> <br>
+                                            <span class="price" style="text-decoration: line-through;">{{ number_format($lienquan->price, 0) }} VNĐ</span>
+                                        </div>
+                                        <div class="content-right">
+                                            <span class="price" style="color:brown">{{ number_format($lienquan->price-($lienquan->price*10/100), 0) }} VNĐ</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- <div class="product-default-single-item product-color--golden swiper-slide">
+                                            <div class="image-box">
+                                                <a href="product-details-default.html" class="image-link">
+                                                    <img src="assets/images/product/default/home-1/default-9.jpg" alt="">
+                                                </a>
+                                                <div class="action-link">
+                                                    <div class="action-link-left">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a>
+                                                    </div>
+                                                    <div class="action-link-right">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
+                                                        <a href="wishlist.html"><i class="icon-heart"></i></a>
+                                                        <a href="compare.html"><i class="icon-shuffle"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                                <div class="content-left">
+                                                    <h6 class="title"><a href="product-details-default.html">Hót rác MIKIA</a></h6>
+                                                    <span class="price" style="text-decoration: line-through;">80,000 VNĐ</span>
+                                                    
+                                                </div>
+                                                <div class="content-right">
+                                                    <span class="price" style="color:brown">56,000 VNĐ</span>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                @endforeach
+                                <!-- End Product Default Single Item -->
+
+                            </div>
+                        </div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('#add-to-cart').on('click', function() {
+            var id = $(this).data('id');
+            var count = $('#count').val();
+            var product_count = $('#product_count').val();
+            if (count > product_count) {
+                alert("Vượt quá số lượng cho phép");
+            } else {
+                $.ajax({
+                    url: "{{url('/add-to-cart')}}",
+                    method: 'post',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        id,
+                        count
+                    },
+                    success: function(res) {
+                        if (res) {
+                            console.log(res);
+                        }
+                    },
+                    error: function(mess) {
+                        console.log(mess);
+                    }
+                })
+                alert("Thêm thành công <3");
+            }
+
+        });
+    });
+</script>
 <!-- End Product Default Slider Section -->
 
 <!-- Start Footer Section -->

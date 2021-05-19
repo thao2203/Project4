@@ -56,7 +56,9 @@
                         </div>
                         <div class="form-group">
                             <label>Nhập nội dung</label>
-                            <textarea name="content" class="form-control tinymce_editor_init" rows="8">{{ $product -> content }}</textarea>
+              <textarea class="textarea" name="content" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $product -> content }}</textarea>
+          
+                            <!-- <textarea name="content" class="form-control tinymce_editor_init" ></textarea> -->
                         </div>
                         <div class="form-group">
                             <label>Nhập số lượng</label>

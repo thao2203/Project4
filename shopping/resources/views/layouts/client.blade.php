@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
-
 </head>
 <body>
     <!-- Start Header Area -->
@@ -21,8 +20,9 @@
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <script src="{{asset('assets/js/vendor/vendor.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/plugins.min.js')}}"></script> 
-
+    <!-- <script src="{{asset('assets/js/sweetalert.min.js')}}"></script> -->
     <!-- Main JS -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+    
 </body>
 </html>

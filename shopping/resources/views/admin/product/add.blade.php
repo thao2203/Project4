@@ -6,11 +6,6 @@
 <title>Thêm sản phẩm</title>
 @endsection
 
-@section('css')
-<link href="{{ asset('vendors/select2/select2.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('admins/product/add/add.css') }}" rel="stylesheet" />
-
-@endsection
 
 @section('content')
 
@@ -46,16 +41,16 @@
             <div class="form-group">
               <label>Chọn loại sản phẩm</label>
               <select class="form-control" name="category_id">
-									<option value="0">Chọn loại sản phẩm gốc</option>
-									{!! $htmlOption !!}
-								</select>
+                <option value="0">Chọn loại sản phẩm gốc</option>
+                {!! $htmlOption !!}
+              </select>
             </div>
             <div class="form-group">
               <label>Chọn nhà cung cấp</label>
-              <select class="form-control" name="category_id">
-									<option value="0">Chọn nhà cung cấp</option>
-									{!! $htmlSupplier !!}
-								</select>
+              <select class="form-control" name="supplier_id">
+                <option value="0">Chọn nhà cung cấp</option>
+                {!! $htmlSupplier !!}
+              </select>
             </div>
             <!-- <div class="form-group">
               <label>Nhập thẻ chú thích cho sản phẩm</label>
@@ -63,8 +58,8 @@
               </select>
             </div> -->
             <div class="form-group">
-              <label>Nhập nội dung</label>
-              <textarea id="" name="content" class="form-control tinymce_editor_init" rows="8"></textarea>
+            <label>Nhập nội dung</label>
+              <textarea class="textarea" name="content" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
             </div>
             <div class="form-group">
               <label>Nhập số lượng</label>
@@ -84,9 +79,4 @@
   </div>
 
 </div>
-@endsection
-
-@section('js')
-<script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
-<script src="{{ asset('admins/product/add/add.js') }}"></script>
 @endsection
