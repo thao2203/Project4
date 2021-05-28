@@ -15,32 +15,46 @@ class CartController extends Controller
         $this->product = $product;
     }
 
+    public function  gio_hang(Request $request)
+    {
+        $meta_desc = "Giỏ hàng của bạn";
+        $meta_keywords = "Giỏ hàng";
+        $meta_title = "Giỏ hàng";
+
+    }
     public function save_cart(Request $request)
     {
         $data = $this->product->find($request->id);
         $session_id = substr(md5(microtime()),rand(0,26),5); //sinh mã id cho session, mỗi 1 product trong cart có 1 id session khác nhau
         $cart = Session::get('cart');
         if($cart){
-            $ischeck = 0;
-            foreach($cart as $key => $item){
-                if($item['product_id']==$request->id){
-                    $ischeck++;
-                    $cart[$key]['product_count'] = $item['product_count'] + $request->count;    
+            $is_avaible= 0;
+            foreach($cart as $key => &$val){
+                if($val['product_id'] == $request->id){
+                    $is_avaible = 1;
+                    $cart[$key] = array(
+                        'session_id' => $val['session_id'],
+                        'product_name' => $val['product_name'],
+                        'product_id' => $val['product_id'],
+                        'product_img' => $val['product_img'],
+                        'product_count' => $val['product_count']+ $request->count,
+                        'product_price' => $val['product_price'],
+                    );
+                    Session::put('cart',$cart);
                 }
-                unset($cart);
             }
-            if($ischeck == 0){
+            if($is_avaible == 0){
                 $cart[] = array(
                     "session_id" => $session_id,
                     "product_id" => $data['id'],
                     "product_name" => $data['name'],
-                    "product_price" => $data['price'],
+                    "product_price" => $data['price']*10/100, //em lấy giá chứ có giá giảm đâu bé
                     "product_img" => $data['feature_image_path'],
                     "product_count" => $request->count,
                 );
                 Session::put('cart',$cart);
             }            
-            
+             vvg7777777gg7exs
         }
         else{
             $cart[] = array(
@@ -54,6 +68,7 @@ class CartController extends Controller
             Session::put('cart',$cart);
         }
         Session::save();
-        print_r(Session::get('cart'));
+        print_r(true);
     }
+
 }

@@ -7,7 +7,7 @@
                         <!-- Start Header Logo -->
                         <div class="header-logo">
                             <div class="logo">
-                                <a href="/"><img src="assets/images/logo/logo_black.png" alt=""></a>
+                                <a href="/"><img src={{ asset('assets/images/logo/logo_black.png') }} alt=""></a>
                             </div>
                         </div>
                         <!-- End Header Logo -->

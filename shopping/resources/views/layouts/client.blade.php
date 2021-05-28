@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{asset('template_client/assets/lib/toastr.min.css')}}">
 </head>
 <body>
     <!-- Start Header Area -->
@@ -22,6 +23,7 @@
     <script src="{{asset('assets/js/plugins/plugins.min.js')}}"></script> 
     <!-- <script src="{{asset('assets/js/sweetalert.min.js')}}"></script> -->
     <!-- Main JS -->
+    <script src="{{asset('template_client/assets/lib/toastr.min.js')}}"></script> 
     <script src="{{asset('assets/js/main.js')}}"></script>
     
 </body>

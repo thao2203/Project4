@@ -40,6 +40,8 @@ Route::get('/lien-he', 'App\Http\Controllers\HomeController@contactUs');
 
 Route::post('/add-to-cart', 'App\Http\Controllers\CartController@save_cart');
 
+Route::get('/chi-tiet-gio-hang', 'App\Http\Controllers\HomeController@chiTietGioHang');
+
 
 
 Route::prefix('admin')->group(function () {

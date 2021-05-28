@@ -27,17 +27,20 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(15)
             ->get();
-
         $categories = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('categories.id', 'categories.name', 'products.feature_image_path', DB::raw('SUM(products.quantity) as quantity'))
             ->groupBy('categories.id', 'categories.name', 'products.feature_image_path')
             ->get();
-
+        $detail_products = DB::table('products')
+            ->join('suppliers', 'products.supplier_id', '=', 'suppliers.id')
+            ->where('products.id','=',$products[0]->id)
+            ->select('products.*','suppliers.Name')
+            ->get(); 
         $datas = Category::where('parent_id', 0)->get(); 
 
 
-        return view('client.home', compact('products', 'categories', 'datas'));
+        return view('client.home', compact('products', 'categories', 'datas','detail_products'));
     }
 
     public function detail($id)
@@ -89,5 +92,11 @@ class HomeController extends Controller
     {
         $datas = Category::where('parent_id', 0)->get(); 
         return view('client.contactUs', compact('datas'));
+    }
+
+    public function chiTietGioHang()
+    {
+        $datas = Category::where('parent_id', 0)->get(); 
+        return view('client.cart', compact('datas'));
     }
 }

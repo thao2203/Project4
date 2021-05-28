@@ -948,6 +948,7 @@
     </div>
 </div>
 <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $('#add-to-cart').on('click', function() {
@@ -967,14 +968,14 @@
                     },
                     success: function(res) {
                         if (res) {
-                            console.log(res);
+                            toastr.success("Thêm sản phẩm vào giỏ hàng thành công!")
+                            location.reload();
                         }
                     },
                     error: function(mess) {
                         console.log(mess);
                     }
                 })
-                alert("Thêm thành công <3");
             }
 
         });

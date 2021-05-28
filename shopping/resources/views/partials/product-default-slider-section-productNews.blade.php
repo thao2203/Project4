@@ -62,7 +62,7 @@
                                             
                                             <div class="content-right">
                                             
-                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} VNĐ</span>
+                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price), 0) }} VNĐ</span>
                                             </div>
 
                                         </div>
