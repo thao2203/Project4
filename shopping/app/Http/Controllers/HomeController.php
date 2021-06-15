@@ -6,32 +6,39 @@ use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
+use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Cookie;
 class HomeController extends Controller
 {
     private $product;
     private $supplier;
 
-    public function __construct(Product $product, Supplier $supplier)
+    public function __construct(Product $product, Supplier $supplier, Blog $blog)
     {
         $this->product = $product;
         $this->supplier = $supplier;
+        $this->blog = $blog;
+       
     }
 
     public function index()
     {
+        
         $products = DB::table('products')
             ->orderBy('created_at', 'desc')
-            ->take(15)
+            ->get();
+        $products_bestSeller = DB::table('order_details')
+            ->orderBy('quantity', 'desc')
             ->get();
         $categories = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('categories.id', 'categories.name', 'products.feature_image_path', DB::raw('SUM(products.quantity) as quantity'))
             ->groupBy('categories.id', 'categories.name', 'products.feature_image_path')
             ->get();
+
         $detail_products = DB::table('products')
             ->join('suppliers', 'products.supplier_id', '=', 'suppliers.id')
             ->where('products.id','=',$products[0]->id)
@@ -39,8 +46,19 @@ class HomeController extends Controller
             ->get(); 
         $datas = Category::where('parent_id', 0)->get(); 
 
-
-        return view('client.home', compact('products', 'categories', 'datas','detail_products'));
+        $new_blogs = DB::table('blogs')
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get();
+        if(!Cookie::get('id'))
+        {    $lifetime = time() + 60 * 60 * 24 * 365;// one year
+          
+          //  return $lifetime;
+            return response(view('client.home', compact('products', 'categories','new_blogs', 'datas','detail_products')))->cookie(Cookie::make('id', (string) Str::uuid(), $lifetime));
+        }
+     
+        return view('client.home', compact('products', 'categories','new_blogs', 'datas','detail_products'));
+            
     }
 
     public function detail($id)
@@ -48,7 +66,7 @@ class HomeController extends Controller
         $detail_products = $this->product
             ->join('suppliers', 'products.supplier_id', '=', 'suppliers.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('categories.name','products.*')
+            ->select('categories.name','products.*','suppliers.name as sup_name')
             ->find($id);
 
         $related_products = DB::table('products')
@@ -56,47 +74,113 @@ class HomeController extends Controller
             ->where('products.category_id', '=', $detail_products->category_id)
             ->select('products.*')
             ->get();
-
         $datas = Category::where('parent_id', 0)->get(); 
         return view('client.detail', compact('detail_products', 'related_products','datas'));
     }
+
+    public function search($key)
+    {
+        
+        $datas = Category::where('parent_id', 0)->get(); 
+        $all_suppliers = DB::table('suppliers')
+        ->select('suppliers.id','suppliers.name')
+        ->get();
+        
+            $allcate = DB::table('categories')
+            ->select('categories.id','categories.name')
+            ->get();
+            $datapro=DB::table("products")
+            ->where("name","like","%".$key."%")->select("*")
+            ->paginate(12);
+              
+           //  dd( $data);
+            return view('client.searchProduct', compact('datapro','allcate','datas','all_suppliers'));
+    }
+
+
     public function category($id)
     {
         $all_suppliers = DB::table('suppliers')
             ->select('suppliers.id','suppliers.name')
             ->get();
-
-        $products = DB::table('products')
-            ->orderBy('created_at', 'desc')
-            ->take(15)
-            ->get();
-
+            
         $allcate = DB::table('categories')
+            ->select('categories.id','categories.name')
             ->get();
 
         $category_products = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->where('products.category_id', '=', $id)
-            ->select('products.*')
-            ->get();
+            ->select('products.*', 'categories.name as cate_name')
+            ->paginate(12);
+        
         $datas = Category::where('parent_id', 0)->get();  
-        return view('client.categories', compact('category_products','allcate','datas','products','all_suppliers'));
+        return view('client.categories', compact('category_products','allcate','datas','all_suppliers'));
     }
-    
+    public function category_supplier($id)
+    {
+        $all_suppliers = DB::table('suppliers')
+        ->select('suppliers.id','suppliers.name')
+            ->get();
+            
+        $allcate = DB::table('categories')
+        ->select('categories.id','categories.name')
+            ->get();
+
+        $category_products = DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('suppliers', 'products.supplier_id', '=', 'suppliers.id')
+            ->where('products.category_id', '=', $id ,'suppliers.id', '=' ,'products.id')
+            ->select('products.*', 'suppliers.name as cate_name')
+            ->paginate(12);
+        $datas = Category::where('parent_id', 0)->get();  
+        return view('client.categories', compact('category_products','allcate','datas','all_suppliers'));
+    }
+   
     public function aboutUs()
     {
         $datas = Category::where('parent_id', 0)->get(); 
         return view('client.aboutUs', compact('datas'));
     }
+
     public function contactUs()
     {
         $datas = Category::where('parent_id', 0)->get(); 
         return view('client.contactUs', compact('datas'));
     }
 
-    public function chiTietGioHang()
-    {
+    public function blog(){
         $datas = Category::where('parent_id', 0)->get(); 
-        return view('client.cart', compact('datas'));
+        $star_blogs = DB::table('blogs')
+        ->select('blogs.avt','blogs.name', 'blogs.view','blogs.created_at','blogs.id')
+        ->orderBy('view', 'desc')
+        ->take(5)
+        ->get();
+        $detail_blogs = DB::table('blogs')
+            ->join('users', 'blogs.userID', '=', 'users.id')
+            ->select('blogs.*','users.name as user_name')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+        return view('client.blog', compact('datas','detail_blogs','star_blogs'));
     }
+
+    public function blogDetail($id){
+        $datas = Category::where('parent_id', 0)->get(); 
+        $star_blogs = DB::table('blogs')
+            ->select('blogs.avt','blogs.name', 'blogs.view','blogs.created_at','blogs.id')
+            ->orderBy('view', 'desc')
+            ->take(15)
+            ->get();
+        $blogs = DB::table('blogs')
+            ->find($id);
+        $related_blogs = DB::table('blogs')
+            ->join('users', 'blogs.userID', '=', 'users.id')
+            ->where('blogs.id','=',$blogs->id)
+            ->select('blogs.*','users.name as user_name')
+            ->paginate(6);
+        return view('client.blogDetail', compact('datas','blogs','star_blogs','related_blogs'));
+    }
+
+   
+    
 }

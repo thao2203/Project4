@@ -3,7 +3,7 @@
 @extends('layouts.admin')
 
 @section('title')
-<title>Thêm sản phẩm</title>
+<title>Sửa sản phẩm</title>
 @endsection
 
 @section('css')
@@ -33,12 +33,12 @@
                         </div>
                         <div class="form-group">
                             <label>Giá sản phẩm</label>
-                            <input type="text" class="form-control" value="{{ number_format($product->price, 0) }}" name='price' placeholder="Nhập giá sản phẩm">
+                            <input type="text" class="form-control" value="{{ $product->price }}" name='price' placeholder="Nhập giá sản phẩm">
                         </div>
                         <div class="form-group">
                             <label>Ảnh đại diện</label>
                             <p><img src="{{url('/images/'.$product->feature_image_path)}}" style="width:100px;height:150px" alt=""></p>
-                            <input type="file" class="form-control-file" name='feature_image_path'>
+                            <input type="file" value="{{ $product->feature_image_path }}"  class="form-control-file" name='feature_image_path'>
                         </div>
                         <div class="form-group">
                             <label>Chọn loại sản phẩm</label>

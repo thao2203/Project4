@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 |
 */
 Route::get('/', action:'App\Http\Controllers\HomeController@index');
+Route::get('clientsearch/{key}', 'App\Http\Controllers\HomeController@search');
+Route::get('/order-clients', 'App\Http\Controllers\OrderController@getOrderList');
 
 Route::get('admin', 'App\Http\Controllers\AdminController@loginAdmin');
 
@@ -33,15 +35,34 @@ Route::get('/home', function () {
 Route::get('detail/{id}', 'App\Http\Controllers\HomeController@detail');
 
 Route::get('categories/{id}', 'App\Http\Controllers\HomeController@category');
+Route::get('categories-supplier/{id}/{sup_id}', 'App\Http\Controllers\HomeController@category_supplier');
 
 Route::get('/chinh-sach', 'App\Http\Controllers\HomeController@aboutUs');
 
-Route::get('/lien-he', 'App\Http\Controllers\HomeController@contactUs');
+Route::get('/bai-viet', 'App\Http\Controllers\HomeController@blog');
+
+Route::get('/chi-tiet-bai-viet/{id}', 'App\Http\Controllers\HomeController@blogDetail');
+Route::get('/chi-tiet-bai-viet/{id}', 'App\Http\Controllers\HomeController@blogDetail');
+
 
 Route::post('/add-to-cart', 'App\Http\Controllers\CartController@save_cart');
 
-Route::get('/chi-tiet-gio-hang', 'App\Http\Controllers\HomeController@chiTietGioHang');
+Route::post('/add-cart-ajax', 'App\Http\Controllers\CartController@add_cart_ajax');
 
+Route::post('/them-don-hang', 'App\Http\Controllers\CartController@save_thanhToan');
+
+Route::post('/update-cart', 'App\Http\Controllers\CartController@update_cart');
+
+Route::get('/delete-product/{session_id}', 'App\Http\Controllers\CartController@delete_product');
+
+Route::get('/del-all-product', 'App\Http\Controllers\CartController@delete_all_product');
+
+Route::get('/chi-tiet-gio-hang', 'App\Http\Controllers\CartController@chiTietGioHang');
+
+Route::get('/thanh-toan', 'App\Http\Controllers\CartController@thanhToan');
+
+// Counpon /check-coupon
+Route::post('/check-coupon', 'App\Http\Controllers\CartController@check_coupon');
 
 
 Route::prefix('admin')->group(function () {
@@ -76,33 +97,33 @@ Route::prefix('admin')->group(function () {
 	    ]);
 	});
 
-	Route::prefix('menus')->group(function () {
+	Route::prefix('blogs')->group(function () {
 		//dùng list màn hình category
 		Route::get('/', [
-	    	'as' => 'menus.index',
-	    	'uses' => 'App\Http\Controllers\MenuController@index'
+	    	'as' => 'blogs.index',
+	    	'uses' => 'App\Http\Controllers\BlogController@index'
 	    ]);
 	    Route::get('/create', [
-	    	'as' => 'menus.create',
-	    	'uses' => 'App\Http\Controllers\MenuController@create'
+	    	'as' => 'blogs.create',
+	    	'uses' => 'App\Http\Controllers\BlogController@create'
 	    ]);
 	    Route::post('/store', [
-	    	'as' => 'menus.store',
-	    	'uses' => 'App\Http\Controllers\MenuController@store'
+	    	'as' => 'blogs.store',
+	    	'uses' => 'App\Http\Controllers\BlogController@store'
 	    ]);
 
 	    Route::get('/edit/{id}', [
-	    	'as' => 'menus.edit',
-	    	'uses' => 'App\Http\Controllers\MenuController@edit'
+	    	'as' => 'blogs.edit',
+	    	'uses' => 'App\Http\Controllers\BlogController@edit'
 	    ]);
 	    
 		Route::post('/update/{id}', [
-	    	'as' => 'menus.update',
-	    	'uses' => 'App\Http\Controllers\MenuController@update'
+	    	'as' => 'blogs.update',
+	    	'uses' => 'App\Http\Controllers\BlogController@update'
 	    ]);
 	    Route::get('/delete/{id}', [
-	    	'as' => 'menus.delete',
-	    	'uses' => 'App\Http\Controllers\MenuController@delete'
+	    	'as' => 'blogs.delete',
+	    	'uses' => 'App\Http\Controllers\BlogController@delete'
 	    ]);
 	});
 
@@ -134,6 +155,41 @@ Route::prefix('admin')->group(function () {
 	    	'as' => 'product.delete',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@delete'
 	    ]);
+	});
+
+	//ORDER
+	Route::prefix('order')->group(function () {
+		//dùng list màn hình product
+		Route::get('/', [
+	    	'as' => 'order.index',
+	    	'uses' => 'App\Http\Controllers\OrderController@index'
+	    ]);
+		Route::get('/chi-tiet-don-hang/{id}',[
+			'as' => 'order.detail',
+			'uses' => 'App\Http\Controllers\OrderController@detail'
+		]);
+		 
+	    // Route::get('/create', [
+	    // 	'as' => 'orders.create',
+	    // 	'uses' => 'App\Http\Controllers\OrderController@create'
+	    // ]);
+		// Route::post('/store', [
+	    // 	'as' => 'orders.store',
+	    // 	'uses' => 'App\Http\Controllers\OrderController@store'
+	    // ]);
+		// Route::get('/edit/{id}', [
+	    // 	'as' => 'orders.edit',
+	    // 	'uses' => 'App\Http\Controllers\OrderController@edit'
+	    // ]);
+	    
+		// Route::post('/update/{id}', [
+	    // 	'as' => 'orders.update',
+	    // 	'uses' => 'App\Http\Controllers\OrderController@update'
+	    // ]);
+		// Route::get('/delete/{id}', [
+	    // 	'as' => 'orders.delete',
+	    // 	'uses' => 'App\Http\Controllers\OrderController@delete'
+	    // ]);
 	});
 });
 

@@ -1,6 +1,6 @@
 @extends('layouts.client')
 @section('title')
-<title>Trang về chúng tôi - HONO</title>
+<title>Trang chính sách - HONO</title>
 @endsection
 @section('content')
     <!-- Start Header Area -->
@@ -515,7 +515,7 @@
 <!-- End Modal Add cart -->
 
 <!-- Start Modal Quickview cart -->
-@include('partials.modalQuickview')
+<!-- @include('partials.modalQuickview') -->
 <!-- End Modal Quickview cart -->
 
 @endsection

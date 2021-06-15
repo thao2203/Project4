@@ -5,10 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+  <script src="https://kit.fontawesome.com/974cf27236.js" crossorigin="anonymous"></script>
   @yield('title')
 
   <!-- Font Awesome Icons -->
+  <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/png">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/plugins.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{asset('template_client/assets/lib/toastr.min.css')}}">
+
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -43,6 +49,8 @@
   <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
+
+  
   <!-- AdminLTE App -->
   <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
   <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
@@ -51,8 +59,13 @@
     // Summernote
     $('.textarea').summernote()
   })
+ 
+
 </script>
+
+
   @yield('js')
+
 </body>
 
 </html>

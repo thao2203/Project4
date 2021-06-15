@@ -534,7 +534,7 @@
 <!-- End Modal Add cart -->
 
 <!-- Start Modal Quickview cart -->
-@include('partials.modalQuickview')
+<!-- @include('partials.modalQuickview') -->
 <!-- End Modal Quickview cart -->
 
 @endsection

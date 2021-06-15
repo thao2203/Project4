@@ -325,12 +325,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="breadcrumb-title">Danh mục sản phẩm</h3>
+                    <h3 class="breadcrumb-title">{{$category_products[0]->cate_name}}</h3>
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>
-                                <li><a href="index.html">Trang chủ</a></li>
-                                <li><a href="shop-grid-sidebar-left.html">Sản phẩm</a></li>
+                                <li><a href="/">Trang chủ</a></li>
                                 <li class="active" aria-current="page">Danh mục sản phẩm</li>
                             </ul>
                         </nav>
@@ -359,14 +358,7 @@
                                     <ul class="sidebar-menu-collapse">
                                         <li class="sidebar-menu-collapse-list">
                                             <div class="accordion">
-                                                <a href="/categories/{{$data->id}}" class="accordion-title collapsed" data-bs-toggle="collapse" data-bs-target="#{{$data->id}}" aria-expanded="false">{{$data->name}}</a>
-                                                <!-- <div id="{{$data->id}}" class="collapse">
-                                                    <ul class="accordion-category-list">
-                                                        @foreach($data->categoryChildren as $subItem)
-                                                        <li><a href="#">{{$subItem->name}}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div> -->
+                                                <a href="/categories/{{$data->id}}" class="accordion-title collapsed">{{$data->name}}</a>
                                             </div>
                                         </li> <!-- End Single Menu Collapse List -->
                                     </ul>
@@ -374,7 +366,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        
+
                     </div> <!-- End Single Sidebar Widget -->
 
                     <!-- Start Single Sidebar Widget -->
@@ -395,90 +387,18 @@
                         <div class="sidebar-content">
                             <div class="filter-type-select">
                                 <ul>
-                                @foreach($all_suppliers as $supplier)
-                                <!-- <li>
-                                    <ul class="sidebar-menu-collapse">
-                                        <li class="sidebar-menu-collapse-list">
-                                            <div class="accordion" style="padding-bottom: 3px;">
-                                                <a href="/categories/{{$supplier->id}}" class="accordion-title collapsed" data-bs-toggle="collapse" data-bs-target="#{{$supplier->id}}" aria-expanded="false">{{$supplier->name}}</a>
-                                               
-                                            </div>
-                                        </li> 
-                                    </ul>
-                                </li> -->
+                                    @foreach($all_suppliers as $supplier)
                                     <li>
-                                        <label style=" text-overflow: ellipsis;" class="checkbox-default" for="brakeParts">
-                                            <input type="checkbox" id="brakeParts">
-                                            <span>{{$supplier->name}}</span>
+                                        <label class="checkbox-default" for="brakeParts">
+                                            <input type="checkbox" checked class="check" id="{{$supplier->id}}">
+                                            <span style="width: 235px; text-align: justify;">{{$supplier->name}}</span>
                                         </label>
                                     </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
-                    </div> <!-- End Single Sidebar Widget -->
-
-                    <!-- Start Single Sidebar Widget -->
-                    <!-- <div class="sidebar-single-widget">
-                        <h6 class="sidebar-title">SELECT BY COLOR</h6>
-                        <div class="sidebar-content">
-                            <div class="filter-type-select">
-                                <ul>
-                                    <li>
-                                        <label class="checkbox-default" for="black">
-                                            <input type="checkbox" id="black">
-                                            <span>Black (6)</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox-default" for="blue">
-                                            <input type="checkbox" id="blue">
-                                            <span>Blue (8)</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox-default" for="brown">
-                                            <input type="checkbox" id="brown">
-                                            <span>Brown (10)</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox-default" for="Green">
-                                            <input type="checkbox" id="Green">
-                                            <span>Green (6)</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="checkbox-default" for="pink">
-                                            <input type="checkbox" id="pink">
-                                            <span>Pink (4)</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>  -->
-                    <!-- End Single Sidebar Widget -->
-
-                    <!-- Start Single Sidebar Widget -->
-                    <!-- <div class="sidebar-single-widget">
-                        <h6 class="sidebar-title">Tag products</h6>
-                        <div class="sidebar-content">
-                            <div class="tag-link">
-                                <a href="#">asian</a>
-                                <a href="#">brown</a>
-                                <a href="#">euro</a>
-                                <a href="#">fashion</a>
-                                <a href="#">hat</a>
-                                <a href="#">t-shirt</a>
-                                <a href="#">teen</a>
-                                <a href="#">travel</a>
-                                <a href="#">white</a>
-                            </div>
-                        </div>
-                    </div> -->
-                     <!-- End Single Sidebar Widget -->
-
+                    </div> 
                     <!-- Start Single Sidebar Widget -->
                     <div class="sidebar-single-widget">
                         <div class="sidebar-content">
@@ -491,50 +411,6 @@
                 </div> <!-- End Sidebar Area -->
             </div>
             <div class="col-lg-9">
-                <!-- Start Shop Product Sorting Section -->
-                <!-- <div class="shop-sort-section">
-                    <div class="container">
-                        <div class="row">
-                            
-                            <div class="sort-box d-flex justify-content-between align-items-md-center align-items-start flex-md-row flex-column" data-aos="fade-up" data-aos-delay="0">
-                                
-                                <div class="sort-tablist d-flex align-items-center">
-                                    <ul class="tablist nav sort-tab-btn">
-                                        <li><a class="nav-link active" data-bs-toggle="tab" href="#layout-3-grid"><img src="{{asset('assets/images/icons/bkg_grid.png')}}" alt=""></a></li>
-                                        <li><a class="nav-link" data-bs-toggle="tab" href="#layout-list"><img src="{{asset('assets/images/icons/bkg_list.png')}}" alt=""></a></li>
-                                    </ul>
-
-                                    
-                                    <div class="page-amount ml-2">
-                                        <span>Showing 1–9 of 21 results</span>
-                                    </div> 
-                                </div> 
-
-                                
-                                <div class="sort-select-list d-flex align-items-center">
-                                    <label class="mr-2">Sort By:</label>
-                                    <form action="#">
-                                        <fieldset>
-                                            <select name="speed" id="speed">
-                                                <option>Sort by average rating</option>
-                                                <option>Sort by popularity</option>
-                                                <option selected="selected">Sort by newness</option>
-                                                <option>Sort by price: low to high</option>
-                                                <option>Sort by price: high to low</option>
-                                                <option>Product Name: Z</option>
-                                            </select>
-                                        </fieldset>
-                                    </form>
-                                </div>
-
-
-
-                            </div> 
-                        </div>
-                    </div>
-                </div> -->
-                 <!-- End Section Content -->
-
                 <!-- Start Tab Wrapper -->
                 <div class="sort-product-tab-wrapper">
                     <div class="container">
@@ -544,12 +420,12 @@
                                     <!-- Start Grid View Product -->
                                     <div class="tab-pane active show sort-layout-single" id="layout-3-grid">
                                         <div class="row">
-                                        @foreach($products as $product)
-                                            <div class="col-xl-4 col-sm-6 col-12">
+                                            @foreach($category_products as $product)
+                                            <div class=" col-xl-4 col-sm-6 col-12 product_here {{$product->supplier_id}}ncc ">
                                                 <!-- Start Product Default Single Item -->
-                                                <div class="product-default-single-item product-color--golden" data-aos="fade-up" data-aos-delay="0">
+                                                <div class="product-default-single-item  product-color--golden" data-aos="fade-up" data-aos-delay="0">
                                                     <div class="image-box">
-                                                        <a href="/{{$product->id}}" class="image-link">
+                                                        <a href="/detail/{{$product->id}}" class="image-link">
                                                             <img src="{{url('/images/'.$product->feature_image_path)}}" style="width:270px;height:300px" alt="">
                                                         </a>
                                                         <div class="action-link">
@@ -564,21 +440,21 @@
                                                         </div>
                                                     </div>
                                                     <div class="content">
-                                                    <div class="content-left">
-                                                <h6 class="title"><a href="/{{$product->id}}">{{ $product->name }}</a></h6> <br>
-                                                <span class="price"   style="text-decoration: line-through;">{{ number_format($product->price, 0) }} VNĐ</span>
-                                            </div>
-                                            
-                                            <div class="content-right">
-                                            
-                                                <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} VNĐ</span>
-                                            </div>
+                                                        <div class="content-left">
+                                                            <h6 class="title"><a href="/detail/{{$product->id}}">{{ $product->name }}</a></h6> <br>
+                                                            <span class="price" style="text-decoration: line-through;">{{ number_format($product->price, 0) }} VNĐ</span>
+                                                        </div>
+
+                                                        <div class="content-right">
+
+                                                            <span class="price" style="color:brown">{{ number_format($product->price-($product->price*10/100), 0) }} VNĐ</span>
+                                                        </div>
 
                                                     </div>
                                                 </div>
                                                 <!-- End Product Default Single Item -->
                                             </div>
-                                        @endforeach    
+                                            @endforeach
                                         </div>
                                     </div> <!-- End Grid View Product -->
                                     <!-- Start List View Product -->
@@ -728,14 +604,8 @@
                 </div> <!-- End Tab Wrapper -->
 
                 <!-- Start Pagination -->
-                <div class="page-pagination text-center" data-aos="fade-up" data-aos-delay="0">
-                    <ul>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="ion-ios-skipforward"></i></a></li>
-                    </ul>
-                </div> <!-- End Pagination -->
+                {{ $category_products->Links("tool.pagination")}}
+                <!-- End Pagination -->
             </div>
         </div>
     </div>
@@ -751,8 +621,10 @@
 <!-- Start Modal Add cart -->
 @include('partials.modalAddcart')
 <!-- End Modal Add cart -->
+<script>
 
+</script>
 <!-- Start Modal Quickview cart -->
-@include('partials.modalQuickview')
+<!-- @include('partials.modalQuickview') -->
 <!-- End Modal Quickview cart -->
 @endsection
