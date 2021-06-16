@@ -34,9 +34,15 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
+					
+                        <form id="login-form" class="form" action="/admin" method="post">
                         	@csrf
                             <h3 class="text-center text-info">Đăng nhập</h3>
+							@if(session()->has('error'))          
+                                        <div class="alert alert-primary" role="alert">
+                                        {{ session()->get('error') }}
+                                        </div>                                        
+                        	@endif
                             <div class="form-group">
                                 <label for="username" class="text-info">Tài khoản:</label><br>
                                 <input type="email" name="email" id="username" class="form-control">

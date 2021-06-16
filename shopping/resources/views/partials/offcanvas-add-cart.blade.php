@@ -7,13 +7,10 @@
     <!-- Start  Offcanvas Addcart Wrapper -->
     <div class="offcanvas-add-cart-wrapper">
         <h4 class="offcanvas-title">Giỏ hàng của bạn</h4>
-        <?php
-            $message = Session::get('message');
-            if ($message) {
-                echo '<span style="background: #fef5ef; padding: 5px;" class="text-alert">' . $message . '</span>';
-                Session::put('message', null);
-            }
-        ?>
+       
+           
+         
+          
         @if(Session::get('cart'))
         <ul style="margin-top: 10px;" class="offcanvas-cart">
             @php
@@ -55,5 +52,5 @@
         </ul>
         @endif
     </div> <!-- End  Offcanvas Addcart Wrapper -->
-
+   
 </div>

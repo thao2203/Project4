@@ -59,60 +59,59 @@
                 <td>{{ $order->address }}</td>
                 <td>{{ $order->phone }}</td>
                 @if($order->status==0)
-                  <td>
-                  <select name="" id="">
-                    <option selected value="1">Chưa xác thực</option>
-                    <option value="2">Đã xác thực</option>
-                    <option value="3">Đã giao hàng</option>
-                    <option value="4">Đã thanh toán</option>
+                <td>
+                  <select id="{{$order->id}}" class="status" name="" id="">
+                    <option selected value="0">Chưa xác thực</option>
+                    <option value="1">Đã xác thực</option>
+                    <option value="2">Đã giao hàng</option>
+                    <option value="3">Đã thanh toán</option>
                   </select>
-                  </td>
-                  <td>
+                </td>
+                <td>
                   <a href="{{ route('order.detail',['id' => $order->id]) }}" style="color:white;margin-bottom: 5px;" class="btn btn-sm btn-warning">Xem chi tiết</a>
-                  <a href="" class="btn btn-sm btn-success">Sửa</a>
+                  <a href="{{ route('order.edit',['id' => $order->id]) }}" class="btn btn-sm btn-success">Sửa</a>
                   <a href="" class="btn btn-sm btn-danger" style="margin-left: 3px;">Xóa</a>
                 </td>
-                  @elseif($order->status==1)
-                  <td>
-                  <select name="" id="">
-                    <option value="1">Chưa xác thực</option>
-                    <option selected value="2">Đã xác thực</option>
-                    <option value="3">Đã giao hàng</option>
-                    <option value="4">Đã thanh toán</option>
+                @elseif($order->status==1)
+                <td>
+                  <select id="{{$order->id}}" class="status" name="" id="">
+                    <option value="0">Chưa xác thực</option>
+                    <option selected value="1">Đã xác thực</option>
+                    <option value="2">Đã giao hàng</option>
+                    <option value="3">Đã thanh toán</option>
                   </select>
-                  </td>
-                  <td>
+                </td>
+                <td>
                   <a href="{{ route('order.detail',['id' => $order->id]) }}" class="btn btn-sm btn-default">Xem chi tiết</a>
-                  <a href="" class="btn btn-sm btn-success">Sửa</a>
+                  <a href="{{ route('order.edit',['id' => $order->id]) }}" class="btn btn-sm btn-success">Sửa</a>
                   <a href="" class="btn btn-sm btn-danger">Xóa</a>
                 </td>
-                  @elseif($order->status==2)
-                  <td>
-                  <select name="" id="">
-                    <option value="1">Chưa xác thực</option>
-                    <option  value="2">Đã xác thực</option>
-                    <option selected value="3">Đã giao hàng</option>
-                    <option value="4">Đã thanh toán</option>
+                @elseif($order->status==2)
+                <td>
+                  <select id="{{$order->id}}" class="status" name="" id="">
+                    <option value="0">Chưa xác thực</option>
+                    <option value="1">Đã xác thực</option>
+                    <option selected value="2">Đã giao hàng</option>
+                    <option value="3">Đã thanh toán</option>
                   </select>
-                  </td>
-                  <td>
+                </td>
+                <td>
                   <a href="{{ route('order.detail',['id' => $order->id]) }}" class="btn btn-sm btn-default">Xem chi tiết</a>
                 </td>
-                  @elseif($order->status==3)
-                  <td>
-                  <select name="" id="">
-                    <option value="1">Chưa xác thực</option>
-                    <option  value="2">Đã xác thực</option>
-                    <option  value="3">Đã giao hàng</option>
-                    <option selected value="4">Đã thanh toán</option>
+                @elseif($order->status==3)
+                <td>
+                  <select id="{{$order->id}}" class="status" name="" id="">
+                    <option value="0">Chưa xác thực</option>
+                    <option value="1">Đã xác thực</option>
+                    <option value="2">Đã giao hàng</option>
+                    <option selected value="3">Đã thanh toán</option>
                   </select>
-                  </td>
-                  <td>
+                </td>
+                <td>
                   <a href="{{ route('order.detail',['id' => $order->id]) }}" class="btn btn-sm btn-default">Xem chi tiết</a>
                 </td>
-                  @endif
-                </td>
-                
+                @endif
+
               </tr>
               @endforeach
             </tbody>
@@ -159,6 +158,28 @@
       "autoWidth": false,
       "responsive": true,
     });
+
+    $(".status").change(function(){
+      var data={
+        "id":$(this).attr("id"),
+        "_token": "{{ csrf_token() }}",
+        "status":$(this).val()
+      }
+      $.ajax(
+      {
+        url:"/sua-trang-thai",
+        method:"post",
+        data:data,
+        success:function(d)
+        {
+          console.log(d)
+        },error:function(s)
+        {
+          console.log(s)
+        }
+      }
+      )
+    })
   });
 </script>
 @endsection

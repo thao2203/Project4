@@ -91,7 +91,18 @@ class AdminProductController extends Controller
     public function update($id, Request $request)
     {
 		if (!$request->hasFile('feature_image_path')) {
-			return "Mời chọn file cần upload";
+			$this->product->find($id)->update([
+				'name' => $request->name,
+				'category_id' => $request->category_id,
+				'supplier_id'=>$request->supplier_id,
+				'quantity'=>$request->quantity,
+				'slug' => Str::slug($request->name),
+				'content' => $request->content,
+				'user_id' => 1,
+			
+				'price' => $request->price,
+			]);
+			return redirect()->route('product.index');
 		}
 		$image = $request->file('feature_image_path');
 		$storedPath = $image->move('images', $image->getClientOriginalName());

@@ -26,29 +26,48 @@ class OrderController extends Controller
     }
 
 
-    public function getOrderList()
+    public function getOrderList($status)
     {
+      
         $datas = Category::where('parent_id', 0)->get(); 
+
         $orders = DB::table('orders')
-        ->join('order_details','order_details.orderID','=','orders.id')
-        ->where("guild_id",Cookie::get('id'))
-        ->orderBy('orders.created_at', 'desc')
-        ->select('order_details.*', 'or')
-        ->get();
-        dd($orders);
+            ->orderBy('created_at', 'desc')
+            ->where("guild_id",Cookie::get('id'))
+            ->where("status",$status)
+            ->get();
+        // $order_details = DB::table('order_details')
+        // ->join('orders','orders.id','=','order_details.orderID')
+        // ->where("guild_id",Cookie::get('id'))
+        // ->where("status",$status)
+        // ->orderBy('orders.created_at', 'desc')
+        // ->select('order_details.*','orders.*')
+        // ->get();
         return view('client.purchase', compact('orders','datas'));
     }
 
-
-
+   
+    public function getOrderDetail($id)
+    {
+        $datas = Category::where('parent_id', 0)->get(); 
+        $detail_orders = DB::table('order_details')
+        ->where('orderID',$id)
+        ->get();
+        return view('client.orderDetail', compact('detail_orders','datas'));
+    }
     public function detail($id)
     {
-		$detail_orders = DB::table('order_details')
-            ->join('orders','orders.id','=','order_details.orderID')
-            ->where('order_details.orderID','=',$id)
-            ->select('order_details.*','orders.*')
-            ->get();
+        $detail_orders = DB::table('order_details')
+        ->where('orderID',$id)
+        ->get();
     	return view('admin.order.detail', compact('detail_orders'));	
+    }
+
+    public function updateStatus(Request $request)
+    {
+        DB::table("orders")->where("id",$request->id)
+        ->update(["status"=>$request->status]);
+        return $request;
     }
     // public function getStatus($id)
     // {
@@ -109,14 +128,13 @@ class OrderController extends Controller
     // 	return $htmlOptionSupplier;
     // }
 
-	// public function edit($id)
-    // {
-    // 	$product = $this->product->find($id); //Lấy danh mục theo id
- 	// 	$htmlOption = $this->getCategory($product->category_id);
-	// 	$htmlSupplier = $this->getSupplier($product->supplier_id);
-		
-    // 	return view('admin.product.edit', compact('product', 'htmlOption','htmlSupplier'));
-    // }
+	public function edit($id)
+    {
+        $detail_orders = DB::table('order_details')
+        ->where('orderID',$id)
+        ->get();
+    	return view('admin.order.edit',compact('detail_orders'));
+    }
 
     // public function update($id, Request $request)
     // {

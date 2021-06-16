@@ -353,7 +353,17 @@
                         <h6 class="sidebar-title">Loại sản phẩm</h6>
                         <div class="sidebar-content">
                             <ul class="sidebar-menu">
-                              {!!$htmlOption!!}
+                                @foreach($datas as $data)
+                                <li>
+                                    <ul class="sidebar-menu-collapse">
+                                        <li class="sidebar-menu-collapse-list">
+                                            <div class="accordion">
+                                                <a href="/categories/{{$data->id}}" class="accordion-title collapsed">{{$data->name}}</a>
+                                            </div>
+                                        </li> <!-- End Single Menu Collapse List -->
+                                    </ul>
+                                </li>
+                                @endforeach
                             </ul>
                         </div>
 

@@ -1,10 +1,124 @@
 @extends('layouts.client')
 @section('title')
-<title>Trang giỏ hàng - HONO</title>
+<title>Trang đặt hàng- HONO</title>
 @endsection
 @section('content')
-<!-- Start Header Area -->
-@include('partials.header-section')
+<header class="header-section d-none d-xl-block">
+    <div class="header-wrapper">
+        <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center justify-content-between">
+                        <!-- Start Header Logo -->
+                        <div class="header-logo">
+                            <div class="logo">
+                                <a href="/"><img src={{ asset('assets/images/logo/logo_black.png') }} alt=""></a>
+                            </div>
+                        </div>
+                        <!-- End Header Logo -->
+
+                        <!-- Start Header Main Menu -->
+                        <div class="main-menu menu-color--black menu-hover-color--golden">
+                            <nav>
+                                <ul>
+                                    <li class="has-dropdown">
+                                        <a class="active main-menu-link" href="/">Trang chủ </i></a>
+
+                                    </li>
+                                    <li class="has-dropdown has-megaitem">
+                                        <a href="product-details-default.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                        <!-- Mega Menu -->
+                                        <div class="mega-menu">
+                                            <ul class="mega-menu-inner">
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip(0)->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip(($datas->count()/4))->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip(($datas->count()/2))->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip($datas->count()-($datas->count()/4))->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="has-dropdown">
+                                        <a href="/bai-viet">Bài viết</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/chinh-sach">Về chúng tôi</a>
+                                    </li>
+                                    <li>
+                                        <a href="/lien-he">Liên hệ</a>
+                                    </li>
+                                    <li class="has-dropdown">
+                                        <a>Đơn hàng<i class="fa fa-angle-down"></i></a>
+                                        <!-- Sub Menu -->
+                                        <ul class="sub-menu">
+                                            <li><a href="/order-clients/0">Chờ xác nhận</a></li>
+                                            <li><a href="/order-clients/1">Chờ lấy hàng</a></li>
+                                            <li><a href="/order-clients/2">Đang giao hàng</a></li>
+                                            <li><a href="/order-clients/3">Đã giao hàng</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- End Header Main Menu Start -->
+
+                        <!-- Start Header Action Link -->
+                        <ul class="header-action-link action-color--black action-hover-color--golden">
+                            <li>
+                                <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                    <i class="icon-heart"></i>
+                                    <span class="item-count">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+                                    <i class="icon-bag"></i>
+                                    <span class="item-count">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#search">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </li>
+                            <!-- <li>
+                                    <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
+                                        <i class="icon-menu"></i>
+                                    </a>
+                                </li> -->
+                        </ul>
+                        <!-- End Header Action Link -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 <!-- Start Header Area -->
 
 <!-- Start Mobile Header -->
@@ -317,19 +431,19 @@
 
 <!-- Offcanvas Overlay -->
 <div class="offcanvas-overlay"></div>
- 
+
 <!-- ...:::: Start Breadcrumb Section:::... -->
 <div class="breadcrumb-section breadcrumb-bg-color--golden">
     <div class="breadcrumb-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="breadcrumb-title">Giỏ hàng</h3>
+                    <h3 class="breadcrumb-title">CHI TIẾT ĐƠN HÀNG</h3>
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>
-                                <li><a href="index.html">Trang chủ</a></li>
-                                <li class="active" aria-current="page">Giỏ hàng</li>
+                                <li><a href="/">Trang chủ</a></li>
+                                <li><a href="blog-grid-sidebar-left.html">Chi tiết đơn hàng</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -339,154 +453,90 @@
     </div>
 </div> <!-- ...:::: End Breadcrumb Section:::... -->
 
-<!-- ...:::: Start Cart Section:::... -->
+<!-- ...:::: Start Blog List Section:::... -->
+<div class="blog-section">
+    <div class="container">
+        <div class="row flex-column-reverse flex-lg-row">
+            <div class="col-lg-3">
+                <!-- Start Sidebar Area -->
+                <div class="siderbar-section" data-aos="fade-up" data-aos-delay="0">
 
-<div class="cart-section">
-    @if(!Session::get('cart'))
-    <div class="row ">
-            <div  class="col-12 d-flex justify-content-center">
-        <div class="alert alert-warning" role="alert">
-            Giỏ hàng của bạn trống    
-        </div>
+                   
+
+                    <!-- Start Single Sidebar Widget -->
+                    <div class="sidebar-single-widget">
+                        <h6 class="sidebar-title">CATEGORIES</h6>
+                        <div class="sidebar-content">
+                            <ul class="sidebar-menu">
+                                <li><a href="/order-clients/0">Chờ xác nhận</a></li>
+                                <li><a href="/order-clients/1">Chờ lấy hàng</a></li>
+                                <li><a href="/order-clients/2">Đang giao hàng</a></li>
+                                <li><a href="/order-clients/3">Đã giao hàng</a></li>
+
+                            </ul>
+                        </div>
+                    </div> <!-- End Single Sidebar Widget -->
+
+
+
+                </div> <!-- End Sidebar Area -->
             </div>
-    </div>
-    @endif
-    <!-- Start Cart Table -->
-    @if(Session::get('cart')==true)
-    <div class="cart-table-wrapper" data-aos="fade-up" data-aos-delay="0">
-        <div class="container">
-            <div class="row">
-            <div class="col-12">
-                        @if(session()->has('message'))          
-                                        <div class="alert alert-primary" role="alert">
-                                        {{ session()->get('message') }}
-                                        </div>                                        
-                        @endif
-            </div>
-                <form action="{{url('/update-cart')}}" method="POST">
-                    @csrf
-                    <div class="col-12">
-                        <div class="table_desc">
-                       
-                            <!-- <?php
-                            $message = Session::get('message');
-                            if ($message) {
-                                echo '<span style="background: #fef5ef; padding: 5px;" class="text-alert">' . $message . '</span>';
-                                Session::put('message', null);
-                            }
-                            ?> -->
-                            <div class="table_page table-responsive">
+            <div class="col-lg-9">
+                <div class="blog-wrapper">
+                    <div class="row mb-n6">
 
-                                <table>
-                                    <!-- Start Cart Table Head -->
-                                    <thead>
-                                        <tr>
-                                            <th class="product_remove">Xóa</th>
-                                            <th class="product_thumb">Hình ảnh</th>
-                                            <th class="product_name">Sản phẩm</th>
-                                            <th class="product-price">Giá (VNĐ)</th>
-                                            <th class="product_quantity">Số lượng</th>
-                                            <th class="product_total">Thành tiền (VNĐ)</th>
-                                        </tr>
-                                    </thead> <!-- End Cart Table Head -->
-                                    <tbody>
-
-                                        <!-- Start Cart Single Item-->
-                                        @php
-                                        $total = 0;
-                                        @endphp
-                                      
-                                        @foreach(Session::get('cart') as $item)
-                                        @php
-                                        $subtotal = (integer)$item['product_price']*(integer)$item['product_count'];
-                                        $total += $subtotal;
-                                        @endphp
-
-
-                                        <tr>
-                                            <td class="product_remove"><a class="offcanvas-cart-item-delete" href="{{url('/delete-product/'.$item['session_id'])}}"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="/detail/{{ $item['product_id']}}"><img src="/images/{{$item['product_img']}}" alt=""></a></td>
-                                            <td class="product_name"><a href="/detail/{{ $item['product_id']}}">{{$item['product_name']}}</a></td>
-                                            <td class="product-price">{{number_format($item['product_price'], 0)}}</td>
-                                            <td class="product_quantity"><label>Số lượng</label> <input min="1" name="cart_qty[{{$item['session_id']}}]" value="{{$item['product_count']}}" type="number"></td>
-                                            <td class="product_total">{{ number_format($subtotal, 0)}}</td>
-
-                                        </tr>
+                        <div class="col-lg-12 col-md-6">
+                            <form>
+                                <h3>Chi tiết đơn hàng của bạn</h3>
+                                <div class="order_table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Hình ảnh</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($detail_orders as $item)
+                                            <tr>
+                                                <td> <img style="width: 50px;margin-left: 10px;" src="/images/{{$item->img_pro}}" alt=""></td>
+                                                <td>{{$item->name_pro}}</td>
+                                                <td>{{$item->quantity}} </td>
+                                                <td> {{ number_format($item->sumPrice_pro, 0)}} VNĐ</td>
+                                            </tr>
                                         @endforeach
-                                        <!-- <tr>
-                                            <td colspan="6"><center>
-                                                @php
-                                                echo 'Hãy thêm giản phẩm vào giỏ hàng của bạn nhé !!!'
-                                                @endphp
-                                            </td></center>
-                                        </tr> -->
+                                        </tbody>
 
-                                        <!-- End Cart Single Item-->
+                                    </table>
+                                </div>
 
-                                    </tbody>
-                                </table>
+                            </form>
+                        </div> 
 
-                            </div>
-                            <div class="cart_submit">
-                                <!-- <input class="check_out btn btn-md btn-golden" type="submit" value="Cập nhật giỏ hàng" name="updat_qty"> -->
-                                <a class="check_out btn btn-md btn-golden" href="{{url('/del-all-product')}}">
-                                Xóa tất cả</a>
-                                <button class="check_out btn btn-md btn-golden" name="update_qty" type="submit">Cập nhật giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                
-            </div>
-        </div> <!-- End Cart Table -->
-        <div class="coupon_area">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="col-lg-12 col-md-6">
-                        <div class="coupon_code right" data-aos="fade-up" data-aos-delay="400">
-                            <h3>TỔNG GIỎ HÀNG</h3>
-                            <div class="coupon_inner">
-                                <div class="cart_subtotal">
-                                    <p>Giá trị đơn hàng:</p>
-                                    <p class="cart_amount">{{ number_format($total, 0)}} VNĐ</p>
-                                </div>
-                                <div class="cart_subtotal ">
-                                    <p>Giá trị vận chuyển (Giá cố định):</span></p>
-                                    <p class="cart_amount"> 50,000 VNĐ</p>
-                                </div>
-                                <a href="#">Tính toán vận chuyển</a>
-
-                                <div class="cart_subtotal">
-                                    <p>Tổng tiền thanh toán:</p>
-                                    <p class="cart_amount">{{ number_format($total + 50000, 0)}} VNĐ</p>
-                                </div>
-                                <div class="checkout_btn">
-                                    <a href="/thanh-toan" class="btn btn-md btn-golden">Tiến hành kiểm tra</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
+                <!-- Start Pagination -->
+
             </div>
         </div>
-        <!-- Start Coupon Start -->
     </div>
-    @endif
-</div>
+</div> <!-- ...:::: End List Section:::... -->
 
-    <!-- Start Footer Section -->
-    @include('partials.footer-section')
-    <!-- End Footer Section -->
+<!-- Start Footer Section -->
+@include('partials.footer-section')
+<!-- End Footer Section -->
 
-    <!-- material-scrolltop button -->
-    <button class="material-scrolltop" type="button"></button>
+<!-- material-scrolltop button -->
+<button class="material-scrolltop" type="button"></button>
 
-    <!-- Start Modal Add cart -->
-    @include('partials.modalAddcart')
-    <!-- End Modal Add cart -->
+<!-- Start Modal Add cart -->
+@include('partials.modalAddcart')
+<!-- End Modal Add cart -->
 
-    <!-- Start Modal Quickview cart -->
-    <!-- @include('partials.modalQuickview')  -->
-    <!-- End Modal Quickview cart -->
-    @endsection
+<!-- Start Modal Quickview cart -->
+<!-- @include('partials.modalQuickview') -->
+<!-- End Modal Quickview cart -->
+@endsection

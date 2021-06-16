@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,22 +11,28 @@ class AdminController extends Controller
     {
 
     	//dd(bcrypt('thaoxingai')); //bcrypt tạo password mã hóa
-    	if(auth()->check())
-    	{
-    		return redirect()->to('home');
-    	}
+    
     	return view('login');
     }
 
     public function postLoginAdmin(Request $request)
     {
-    	$remember = $request->has('remember_me') ? true : false;
-    	//auth() pthuc check tài khoản xem hợp lệ hay ko
-    	if(Auth::attempt([
-    		'email' => $request->email,
-    		'password' => $request->password
-    	], $remember)){
-    		return redirect()->to('home');
-    	}
+		$request->validate([
+			'email'=>'required|email',
+			'password'=>'required|min:5|max:100',
+   
+		]);
+		$admin=DB::table("users")->where("email",$request->email)->where("password",$request->password)->first();
+		if($admin)
+		{
+			$request->session()->put('admin_name',$admin->name);
+			$request->session()->put('admin_id',$admin->id);
+			return redirect("/admin/product");
+		}
+		else
+		{
+			return back()->with("error","tài khoản mật khẩu không dúng");
+		}
+    	dd($request);
     }
 }

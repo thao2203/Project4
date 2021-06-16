@@ -25,11 +25,11 @@
                                 <!-- Additional required wrapper -->
                                 <div class="swiper-wrapper">
                                     <!-- Start Product Default Single Item -->
-                                    @foreach($products as $product)                                   
+                                    @foreach($products_bestSeller as $product)                                   
                                     <div class="product-default-single-item product-color--golden swiper-slide">
                                         <div class="image-box">
                                             <a href="/detail/{{$product->id}}" class="image-link">
-                                                <img src="{{url('/images/'.$product->feature_image_path)}}" style="width:270px;height:300px" alt="">
+                                                <img src="{{url('/images/'.$product->img_pro)}}" style="width:270px;height:300px" alt="">
                                                 <!-- <img src="{{asset('assets/images/product/default/home-1/default-2.jpg')}}" alt=""> -->
                                             </a>
                                             <div class="tag">
@@ -37,7 +37,7 @@
                                             </div>
                                             <div class="action-link">
                                                 <div class="action-link-left">
-                                                    <a href="#" data-bs-toggle="modal" style="font-size: 11px;" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a>
+                                                <button type="button" name="add-to-cart"  data-id="{{$product->id}}"class="btn add-to-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                                 <div class="action-link-right">
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
-                                                <h6 class="title"><a href="/detail/{{$product->id}}">{{ $product->name }}</a></h6> <br>
+                                                <h6 class="title"><a href="/detail/{{$product->id}}">{{ $product->name_pro }}</a></h6> <br>
                                                 <span class="price"   style="text-decoration: line-through;">{{ number_format($product->price, 0) }} VNĐ</span>
                                             </div>
                                             

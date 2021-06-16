@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\Bestseller;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
 use App\Models\Blog;
@@ -15,9 +16,10 @@ class HomeController extends Controller
 {
     private $product;
     private $supplier;
+    private $category;
 
-    public function __construct(Product $product, Supplier $supplier, Blog $blog)
-    {
+    public function __construct(Category $category,Product $product, Supplier $supplier, Blog $blog)
+    {$this->category = $category;
         $this->product = $product;
         $this->supplier = $supplier;
         $this->blog = $blog;
@@ -30,9 +32,9 @@ class HomeController extends Controller
         $products = DB::table('products')
             ->orderBy('created_at', 'desc')
             ->get();
-        $products_bestSeller = DB::table('order_details')
-            ->orderBy('quantity', 'desc')
-            ->get();
+
+        $products_bestSeller =Bestseller::all();
+        
         $categories = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('categories.id', 'categories.name', 'products.feature_image_path', DB::raw('SUM(products.quantity) as quantity'))
@@ -50,14 +52,8 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(10)
             ->get();
-        if(!Cookie::get('id'))
-        {    $lifetime = time() + 60 * 60 * 24 * 365;// one year
-          
-          //  return $lifetime;
-            return response(view('client.home', compact('products', 'categories','new_blogs', 'datas','detail_products')))->cookie(Cookie::make('id', (string) Str::uuid(), $lifetime));
-        }
-     
-        return view('client.home', compact('products', 'categories','new_blogs', 'datas','detail_products'));
+       
+        return view('client.home', compact('products', 'products_bestSeller', 'categories','new_blogs', 'datas','detail_products'));
             
     }
 
@@ -114,8 +110,11 @@ class HomeController extends Controller
             ->select('products.*', 'categories.name as cate_name')
             ->paginate(12);
         
-        $datas = Category::where('parent_id', 0)->get();  
-        return view('client.categories', compact('category_products','allcate','datas','all_suppliers'));
+            $datas = $this->category->all();//Lấy ra tất cả các data
+    	$recusive = new Recusive($datas);
+    	$htmlOption = $recusive->categoryRecusiveUpdatewithlink(0);
+    	
+        return view('client.categories', compact('category_products','datas','allcate','htmlOption','all_suppliers'));
     }
     public function category_supplier($id)
     {
@@ -133,7 +132,7 @@ class HomeController extends Controller
             ->where('products.category_id', '=', $id ,'suppliers.id', '=' ,'products.id')
             ->select('products.*', 'suppliers.name as cate_name')
             ->paginate(12);
-        $datas = Category::where('parent_id', 0)->get();  
+        $datas = Category::get();  
         return view('client.categories', compact('category_products','allcate','datas','all_suppliers'));
     }
    
@@ -181,6 +180,22 @@ class HomeController extends Controller
         return view('client.blogDetail', compact('datas','blogs','star_blogs','related_blogs'));
     }
 
+    public function blogSearch($key){
+        $datas = Category::where('parent_id', 0)->get(); 
+        $star_blogs = DB::table('blogs')
+        ->select('blogs.avt','blogs.name', 'blogs.view','blogs.created_at','blogs.id')
+        ->orderBy('view', 'desc')
+        ->take(5)
+        ->get();
+        $detail_blogs = DB::table('blogs')
+            ->join('users', 'blogs.userID', '=', 'users.id')
+            ->select('blogs.*','users.name as user_name')
+            ->where('blogs.name','like','%'.$key.'%')
+            ->orWhere('blogs.content','like','%'.$key.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+        return view('client.blogSearch', compact('datas','detail_blogs','star_blogs',"key"));
+    }
    
     
 }

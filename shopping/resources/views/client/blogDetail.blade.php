@@ -281,10 +281,11 @@
                     <!-- Start Single Sidebar Widget -->
                     <div class="sidebar-single-widget">
                         <h6 class="sidebar-title">Search</h6>
-                        <div class="default-search-style d-flex">
-                            <input class="default-search-style-input-box" type="search" placeholder="Search..." required>
-                            <button class="default-search-style-input-btn" type="submit"><i class="fa fa-search"></i></button>
-                        </div>
+                        <form id="searchBlogs"  class="default-search-style d-flex">
+                            @csrf
+                                <input id="keyBlog" class="default-search-style-input-box" type="search" placeholder="Tìm kiếm.." required>
+                                <button class="default-search-style-input-btn" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
                     </div> <!-- End Single Sidebar Widget -->
 
                     <!-- Start Single Sidebar Widget -->

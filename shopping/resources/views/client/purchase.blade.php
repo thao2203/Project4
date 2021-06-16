@@ -3,7 +3,122 @@
 <title>Trang đặt hàng- HONO</title>
 @endsection
 @section('content')
-@include('partials.header-section')
+<header class="header-section d-none d-xl-block">
+    <div class="header-wrapper">
+        <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center justify-content-between">
+                        <!-- Start Header Logo -->
+                        <div class="header-logo">
+                            <div class="logo">
+                                <a href="/"><img src={{ asset('assets/images/logo/logo_black.png') }} alt=""></a>
+                            </div>
+                        </div>
+                        <!-- End Header Logo -->
+
+                        <!-- Start Header Main Menu -->
+                        <div class="main-menu menu-color--black menu-hover-color--golden">
+                            <nav>
+                                <ul>
+                                    <li class="has-dropdown">
+                                        <a class="active main-menu-link" href="/">Trang chủ </i></a>
+
+                                    </li>
+                                    <li class="has-dropdown has-megaitem">
+                                        <a href="product-details-default.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                        <!-- Mega Menu -->
+                                        <div class="mega-menu">
+                                            <ul class="mega-menu-inner">
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip(0)->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip(($datas->count()/4))->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip(($datas->count()/2))->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li class="mega-menu-item">
+                                                    <ul class="mega-menu-sub">
+                                                        @foreach($datas->skip($datas->count()-($datas->count()/4))->take($datas->count()/4) as $item)
+                                                        <li><a href="/categories/{{$item->id}}">{{$item->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="has-dropdown">
+                                        <a href="/bai-viet">Bài viết</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/chinh-sach">Về chúng tôi</a>
+                                    </li>
+                                    <li>
+                                        <a href="/lien-he">Liên hệ</a>
+                                    </li>
+                                    <li class="has-dropdown">
+                                        <a>Đơn hàng<i class="fa fa-angle-down"></i></a>
+                                        <!-- Sub Menu -->
+                                        <ul class="sub-menu">
+                                            <li><a href="/order-clients/0">Chờ xác nhận</a></li>
+                                            <li><a href="/order-clients/1">Chờ lấy hàng</a></li>
+                                            <li><a href="/order-clients/2">Đang giao hàng</a></li>
+                                            <li><a href="/order-clients/3">Đã giao hàng</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- End Header Main Menu Start -->
+
+                        <!-- Start Header Action Link -->
+                        <ul class="header-action-link action-color--black action-hover-color--golden">
+                            <li>
+                                <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                    <i class="icon-heart"></i>
+                                    <span class="item-count">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+                                    <i class="icon-bag"></i>
+                                    <span class="item-count">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#search">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </li>
+                            <!-- <li>
+                                    <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
+                                        <i class="icon-menu"></i>
+                                    </a>
+                                </li> -->
+                        </ul>
+                        <!-- End Header Action Link -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 <!-- Start Header Area -->
 
 <!-- Start Mobile Header -->
@@ -323,13 +438,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="breadcrumb-title">Thanh toán</h3>
+                    <h3 class="breadcrumb-title">ĐƠN HÀNG</h3>
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>
-                                <li><a href="index.html">Trang chủ</a></li>
-                                <li><a href="shop-grid-sidebar-left.html">Giỏ hàng</a></li>
-                                <li class="active" aria-current="page">Thanh toán</li>
+                                <li><a href="/">Trang chủ</a></li>
+                                <li><a href="blog-grid-sidebar-left.html">Đơn hàng</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -339,86 +453,96 @@
     </div>
 </div> <!-- ...:::: End Breadcrumb Section:::... -->
 
-<!-- ...:::: Start Checkout Section:::... -->
-<div class="checkout-section">
+<!-- ...:::: Start Blog List Section:::... -->
+<div class="blog-section">
     <div class="container">
-        <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <form action="#">
-                        <h3>Your order</h3>
-                        <div class="order_table table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Hình ảnh</th>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($orders as $item)
-                                    <tr>
-                                    <td> <img style="width: 50px;margin-left: 10px;" src="/images/{{$item['product_img']}}" alt=""></td>
-                                        <td> {{$item->product_name}}</td>
-                                        <td> {{$item->product_count}} </td>
-                                        <td> {{ number_format((integer)$item['product_price']*(integer)$item['product_count'], 0)}} VNĐ</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Cart Subtotal</th>
-                                        <td>$215.00</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Shipping</th>
-                                        <td><strong>$5.00</strong></td>
-                                    </tr>
-                                    <tr class="order_total">
-                                        <th>Order Total</th>
-                                        <td><strong>$220.00</strong></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <div class="payment_method">
-                            <div class="panel-default">
-                                <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse" data-bs-target="#methodCod">
-                                    <input type="checkbox" id="currencyCod">
-                                    <span>Cash on Delivery</span>
-                                </label>
+        <div class="row flex-column-reverse flex-lg-row">
+            <div class="col-lg-3">
+                <!-- Start Sidebar Area -->
+                <div class="siderbar-section" data-aos="fade-up" data-aos-delay="0">
 
-                                <div id="methodCod" class="collapse" data-parent="#methodCod">
-                                    <div class="card-body1">
-                                        <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-default">
-                                <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
-                                    <input type="checkbox" id="currencyPaypal">
-                                    <span>PayPal</span>
-                                </label>
-                                <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
-                                    <div class="card-body1">
-                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order_button pt-3">
-                                <button class="btn btn-md btn-black-default-hover" type="submit">Proceed to PayPal</button>
-                            </div>
+                    <!-- Start Single Sidebar Widget -->
+                    <div class="sidebar-single-widget">
+                        <h6 class="sidebar-title">CATEGORIES</h6>
+                        <div class="sidebar-content">
+                            <ul class="sidebar-menu">
+                                <li><a href="/order-clients/0">Chờ xác nhận</a></li>
+                                <li><a href="/order-clients/1">Chờ lấy hàng</a></li>
+                                <li><a href="/order-clients/2">Đang giao hàng</a></li>
+                                <li><a href="/order-clients/3">Đã giao hàng</a></li>
+
+                            </ul>
                         </div>
-                    </form>
-                </div>
+                    </div> <!-- End Single Sidebar Widget -->
+
+
+
+                </div> <!-- End Sidebar Area -->
             </div>
-        </div> <!-- Start User Details Checkout Form -->
-    </div>
-</div><!-- ...:::: End Checkout Section:::... -->
+            <div class="col-lg-9">
+                <div class="blog-wrapper">
+                    <div class="row mb-n6">
 
-<!-- Start Footer Section -->
+                        <div class="col-lg-12 col-md-6">
+                            <form>
+                                <h3>Đơn đặt hàng của bạn</h3>
+                                <div class="order_table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Tên</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Địa chỉ</th>
+                                                <th>SĐT</th>
+                                                <th>Trạng thái</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Xem chi tiết</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($orders as $item)
+                                            <tr>
+                                                <td> {{$item->name}}></td>
+                                                <td>{{ date("d-m-Y", strtotime($item->created_at))}}</td>
+                                                <td>{{$item->address}} </td>
+                                                <td>{{$item->phone}} </td>
+                                                
+                                                @if($item->status==0)
+                                                <td><a>Chờ xác nhận</a>  
+                                                </td>
+                                                @elseif($item->status==1)
+                                                <td><a>Chờ lấy hàng</a>  
+                                                </td>
+                                                @elseif($item->status==2)
+                                                <td><a>Đang giao hàng</a>  
+                                                </td>
+                                                @elseif($item->status==3)
+                                                <td><a>Đã giao hàng</a>  
+                                                </td>
+                                                @endif
+                                               
+                                                <td> {{ number_format($item->total, 0)}} VNĐ</td>
+                                                <td><a href="/chi-tiet-don-hang/{{$item->id}}"> Xem chi tiết</a></td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Start Pagination -->
+
+            </div>
+        </div>
+    </div>
+</div> <!-- ...:::: End List Section:::... -->
+
 <!-- Start Footer Section -->
 @include('partials.footer-section')
 <!-- End Footer Section -->

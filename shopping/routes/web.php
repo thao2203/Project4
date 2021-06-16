@@ -14,23 +14,21 @@ use Illuminate\Support\Facades\Session;
 |
 */
 Route::get('/', action:'App\Http\Controllers\HomeController@index');
-Route::get('clientsearch/{key}', 'App\Http\Controllers\HomeController@search');
-Route::get('/order-clients', 'App\Http\Controllers\OrderController@getOrderList');
+Route::get('clientsearch/{?key}', 'App\Http\Controllers\HomeController@search');
+Route::get('blogSearch/{?key}', 'App\Http\Controllers\HomeController@blogSearch');
+Route::get('/order-clients/{status}', 'App\Http\Controllers\OrderController@getOrderList');
+Route::get('/chi-tiet-don-hang/{id}', 'App\Http\Controllers\OrderController@getOrderDetail');
 
-Route::get('admin', 'App\Http\Controllers\AdminController@loginAdmin');
+Route::post('/sua-trang-thai', 'App\Http\Controllers\OrderController@updateStatus');
+
+Route::get('admin', 'App\Http\Controllers\AdminController@loginAdmin')->middleware("loginnow");
 
 Route::post('admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
 
 Route::get('authlogin', 'App\Http\Controllers\HomeController@getAuthLogin');
 Route::post('authlogin', 'App\Http\Controllers\HomeController@postAuthLogin');
 
-Route::get('/home', function () {
-	if(!auth()->check())
-    	{
-    		return redirect()->to('admin');
-    	}
-    return view('login');
-});
+
 
 Route::get('detail/{id}', 'App\Http\Controllers\HomeController@detail');
 
@@ -40,7 +38,10 @@ Route::get('categories-supplier/{id}/{sup_id}', 'App\Http\Controllers\HomeContro
 Route::get('/chinh-sach', 'App\Http\Controllers\HomeController@aboutUs');
 
 Route::get('/bai-viet', 'App\Http\Controllers\HomeController@blog');
-
+Route::get("/logout",function(){
+	session()->pull('admin_id');
+	return back();
+});
 Route::get('/chi-tiet-bai-viet/{id}', 'App\Http\Controllers\HomeController@blogDetail');
 Route::get('/chi-tiet-bai-viet/{id}', 'App\Http\Controllers\HomeController@blogDetail');
 
@@ -49,7 +50,7 @@ Route::post('/add-to-cart', 'App\Http\Controllers\CartController@save_cart');
 
 Route::post('/add-cart-ajax', 'App\Http\Controllers\CartController@add_cart_ajax');
 
-Route::post('/them-don-hang', 'App\Http\Controllers\CartController@save_thanhToan');
+Route::post('/them-don-hang', 'App\Http\Controllers\CartController@save_thanhToan')->middleware("ck");
 
 Route::post('/update-cart', 'App\Http\Controllers\CartController@update_cart');
 
@@ -71,30 +72,30 @@ Route::prefix('admin')->group(function () {
 		Route::get('/', [
 	    	'as' => 'categories.index',
 	    	'uses' => 'App\Http\Controllers\CategoryController@index'
-	    ]);
+	    ])->middleware("login");
 	    Route::get('/create', [
 	    	'as' => 'categories.create',
 	    	'uses' => 'App\Http\Controllers\CategoryController@create'
-	    ]);
+	    ])->middleware("login");
 	    Route::post('/store', [
 	    	'as' => 'categories.store',
 	    	'uses' => 'App\Http\Controllers\CategoryController@store'
-	    ]);
+	    ])->middleware("login");
 
 	    Route::get('/edit/{id}', [
 	    	'as' => 'categories.edit',
 	    	'uses' => 'App\Http\Controllers\CategoryController@edit'
-	    ]);
+	    ])->middleware("login");
 	    
 		Route::post('/update/{id}', [
 	    	'as' => 'categories.update',
 	    	'uses' => 'App\Http\Controllers\CategoryController@update'
-	    ]);
+	    ])->middleware("login");
 
 	    Route::get('/delete/{id}', [
 	    	'as' => 'categories.delete',
 	    	'uses' => 'App\Http\Controllers\CategoryController@delete'
-	    ]);
+	    ])->middleware("login");
 	});
 
 	Route::prefix('blogs')->group(function () {
@@ -102,29 +103,29 @@ Route::prefix('admin')->group(function () {
 		Route::get('/', [
 	    	'as' => 'blogs.index',
 	    	'uses' => 'App\Http\Controllers\BlogController@index'
-	    ]);
+	    ])->middleware("login");
 	    Route::get('/create', [
 	    	'as' => 'blogs.create',
 	    	'uses' => 'App\Http\Controllers\BlogController@create'
-	    ]);
+	    ])->middleware("login");
 	    Route::post('/store', [
 	    	'as' => 'blogs.store',
 	    	'uses' => 'App\Http\Controllers\BlogController@store'
-	    ]);
+	    ])->middleware("login");
 
 	    Route::get('/edit/{id}', [
 	    	'as' => 'blogs.edit',
 	    	'uses' => 'App\Http\Controllers\BlogController@edit'
-	    ]);
+	    ])->middleware("login");
 	    
 		Route::post('/update/{id}', [
 	    	'as' => 'blogs.update',
 	    	'uses' => 'App\Http\Controllers\BlogController@update'
-	    ]);
+	    ])->middleware("login");
 	    Route::get('/delete/{id}', [
 	    	'as' => 'blogs.delete',
 	    	'uses' => 'App\Http\Controllers\BlogController@delete'
-	    ]);
+	    ])->middleware("login");
 	});
 
 	//PRODUCT
@@ -133,28 +134,28 @@ Route::prefix('admin')->group(function () {
 		Route::get('/', [
 	    	'as' => 'product.index',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@index'
-	    ]);
+	    ])->middleware("login");
 	    Route::get('/create', [
 	    	'as' => 'product.create',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@create'
-	    ]);
+	    ])->middleware("login");
 		Route::post('/store', [
 	    	'as' => 'product.store',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@store'
-	    ]);
+	    ])->middleware("login");
 		Route::get('/edit/{id}', [
 	    	'as' => 'product.edit',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@edit'
-	    ]);
+	    ])->middleware("login");
 	    
 		Route::post('/update/{id}', [
 	    	'as' => 'product.update',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@update'
-	    ]);
+	    ])->middleware("login");
 		Route::get('/delete/{id}', [
 	    	'as' => 'product.delete',
 	    	'uses' => 'App\Http\Controllers\AdminProductController@delete'
-	    ]);
+	    ])->middleware("login");
 	});
 
 	//ORDER
@@ -163,11 +164,15 @@ Route::prefix('admin')->group(function () {
 		Route::get('/', [
 	    	'as' => 'order.index',
 	    	'uses' => 'App\Http\Controllers\OrderController@index'
-	    ]);
+	    ])->middleware("login");
 		Route::get('/chi-tiet-don-hang/{id}',[
 			'as' => 'order.detail',
 			'uses' => 'App\Http\Controllers\OrderController@detail'
-		]);
+		])->middleware("login");
+		Route::get('/edit/{id}', [
+				'as' => 'order.edit',
+				'uses' => 'App\Http\Controllers\OrderController@edit'
+			])->middleware("login");
 		 
 	    // Route::get('/create', [
 	    // 	'as' => 'orders.create',
@@ -177,10 +182,7 @@ Route::prefix('admin')->group(function () {
 	    // 	'as' => 'orders.store',
 	    // 	'uses' => 'App\Http\Controllers\OrderController@store'
 	    // ]);
-		// Route::get('/edit/{id}', [
-	    // 	'as' => 'orders.edit',
-	    // 	'uses' => 'App\Http\Controllers\OrderController@edit'
-	    // ]);
+		// 
 	    
 		// Route::post('/update/{id}', [
 	    // 	'as' => 'orders.update',

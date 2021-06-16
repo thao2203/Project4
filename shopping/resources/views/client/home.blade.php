@@ -55,13 +55,6 @@
                                     <!-- Start Product Default Single Item -->
                                     @foreach($products as $pro)
                                     <div class="product-default-single-item product-color--golden swiper-slide swiper-slide-active" role="group" aria-label="1 / 12" style="width: 270px; margin-right: 30px;">
-                                    <form>
-                                        @csrf
-                                    <input type="hidden" value="{{$pro->id}}" class="cart_product_id_{{$pro->id}}">
-                                    <input type="hidden" value="{{$pro->name}}" class="cart_product_name_{{$pro->id}}">
-                                    <input type="hidden" value="{{$pro->feature_image_path}}" class="cart_product_img_{{$pro->id}}">
-                                    <input type="hidden" value="{{$pro->price}}" class="cart_product_price_{{$pro->id}}">
-                                    <input type="hidden" value="1" class="cart_product_qty_{{$pro->id}}">
                                     <div class="image-box">
                                             <a href="/detail/{{$pro->id}}" class="image-link">
                                                 <img style="width:270px; height: 270px;" src="{{url('/images/'.$pro->feature_image_path)}}" alt="">
@@ -71,7 +64,7 @@
                                             </div>
                                             <div class="action-link">
                                                 <div class="action-link-left">
-                                                    <button type="button" name="add-to-cart" data-id_product="{{$pro->id}}" class="btn add-to-cart">Thêm vào giỏ hàng</button>
+                                                    <button type="button" name="add-to-cart"  data-id="{{$pro->id}}"class="btn add-to-cart">Thêm vào giỏ hàng</button>
                                                     <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a> -->
                                                 </div>
                                                 <div class="action-link-right">
@@ -91,8 +84,7 @@
                                             </div>
 
                                         </div>
-                                    </form> 
-                                        
+                                   
                                     </div>
                                     @endforeach
                                     <!-- End Product Default Single Item -->

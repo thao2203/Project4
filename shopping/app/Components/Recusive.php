@@ -85,6 +85,28 @@ class Recusive
 
 		return $this->htmlSelect;    				
     }
+	public function categoryRecusiveUpdatewithlink($parentId, $id = 0, $text = '')
+    {
+    	foreach ($this->data as $value) 
+    	{
+    		if($value['parent_id'] == $id)
+    		{
+    			if (!empty($parentId) && $parentId == $value['id'])
+    			{
+    				$this->htmlSelect .= "<a href='/categories/". $value['id']."' class='accordion'>". $text .$value['name']. "</a><br>";
+    			}
+    			else
+    			{
+					$this->htmlSelect .= "<a href='/categories/". $value['id']."' class='accordion'>". $text .$value['name']. "</a><br>";
+    			}
+    			
+    			$this->categoryRecusiveUpdatewithlink($parentId, $value['id'], $text. '--');	
+    		}
+			
+    	}
+
+		return $this->htmlSelect;    				
+    }
 // 	public function statusRecusive ($id)
 // 	{
 // 		foreach ($this->data as $value)

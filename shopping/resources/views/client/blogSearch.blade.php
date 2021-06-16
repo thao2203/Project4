@@ -254,7 +254,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="breadcrumb-title">TING TING BÀI VIẾT THÚ VỊ</h3>
+                    <h3 class="breadcrumb-title">KẾT QUẢ TÌM KIẾM CHO "{{$key}}"</h3>
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>

@@ -849,7 +849,7 @@
                     success: function(res) {
                         if (res) {
                             toastr.success("Thêm sản phẩm vào giỏ hàng thành công!")
-                            location.reload();
+
                         }
                     },
                     error: function(mess) {

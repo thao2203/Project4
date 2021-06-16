@@ -29,7 +29,8 @@ class CartController extends Controller
     public function thanhToan()
     {
         $datas = Category::where('parent_id', 0)->get(); 
-        return view('client.checkOut', compact('datas'));
+        $orders = Order::get();
+        return view('client.checkOut', compact('datas','orders'));
     }
 
     

@@ -3,76 +3,96 @@
 @extends('layouts.admin')
 
 @section('title')
-<title>Sửa đơn hàng</title>
+<title>Quản lý đơn hàng</title>
 @endsection
-
 
 @section('content')
 
 <div class="content-wrapper">
 
-  @include('partials.content-header', ['name' => 'đơn hàng', 'key' => 'Sửa'])
-
-  <div class="content">
-    <div class="container-fluid">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Chỉnh sửa đơn hàng</h3>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!-- <h1 class="m-0 text-dark">Chi tiết đơn hàng</h1> -->
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('order.index') }}">Danh sách đơn hàng</a></li>
+                        <li class="breadcrumb-item active">Chỉnh sửa đơn hàng</li>
+                    </ol>
+                </div><!-- /.col -->
+                <div style="background: #FFF6F1;">
+                    <form>
+                        <h3 style="font-size: 20px;text-align: center!important;line-height: 30px;padding: 5px 10px;text-transform: uppercase;color: #fff;background: #24262b;font-weight: 500;">CHI TIẾT ĐƠN ĐẶT HÀNG</h3>
+                        <div class="order_table table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach($detail_orders as $item)
+                                @php
+                                    $subtotal = $item->sumPrice_pro;
+                                    $total += $subtotal;
+                                 @endphp
+                                    <tr style="background: white;">
+                                        <td style="text-align: center!important;">{{ $loop->index+1 }}</td>
+                                        <td style="text-align: center!important;"><img style="width: 100px;" src="/images/{{$item->img_pro}}" alt=""></td>
+                                        <td style="text-align: center;">{{$item->name_pro}}</td>
+                                        <td style="text-align: center;"><input value="{{$item->quantity}}"> </td>
+                                        <td style="text-align: center;">Xóa</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                               
+                            </table>
+                        </div>
+                        
+                    </form>
+                    <button type="button" class="btn btn-primary">Cập nhật</button>
+                </div>
+                
+            </div>
         </div>
-        <div class="card-body">
-          <form role="form" action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-              <label>Tên người nhận :</label>
-              <input type="text" class="form-control" name='name' placeholder="Nhập tên sản phẩm">
-            </div>
-            <div class="form-group">
-              <label>Số điện thoại :</label>
-              <input type="text" class="form-control" name='price' placeholder="Nhập giá sản phẩm">
-            </div>
-            <div class="form-group">
-              <label>Địa chỉ :</label>
-              <input type="file" class="form-control-file" name='feature_image_path'>
-            </div>
-            <div class="form-group">
-              <label>Chọn loại sản phẩm</label>
-              <select class="form-control" name="category_id">
-                <option value="0">Chọn loại sản phẩm gốc</option>
-                {!! $htmlOption !!}
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Chọn nhà cung cấp</label>
-              <select class="form-control" name="supplier_id">
-                <option value="0">Chọn nhà cung cấp</option>
-                {!! $htmlSupplier !!}
-              </select>
-            </div>
-            <!-- <div class="form-group">
-              <label>Nhập thẻ chú thích cho sản phẩm</label>
-              <select name="tags[]" class="form-control tags_select_choose" multiple="multiple">
-              </select>
-            </div> -->
-            <div class="form-group">
-            <label>Nhập nội dung</label>
-              <textarea class="textarea" name="content" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Nhập số lượng</label>
-              <input type="text" class="form-control" name='quantity' placeholder="Nhập số lượng sản phẩm"></input>
-            </div>
-            <button type="submit" class="btn btn-primary">Hoàn thành</button>
-          </form>
-          @if (session('status'))
-          <p class="text-warning" style="margin:0px;padding:0px">
-            {{ session('status') }}
-          </p>
-          @endif
-        </div>
-
-      </div>
     </div>
-  </div>
+    <!-- Main content -->
+    
+
 
 </div>
+
+</div>
+<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
+            },
+            "ordering": false,
+        });
+
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 @endsection

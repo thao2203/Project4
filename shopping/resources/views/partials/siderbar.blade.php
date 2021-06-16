@@ -15,7 +15,8 @@
           <img src="{{ asset('adminlte/dist/img/avt2.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Thảo Nguyễn</a>
+          <a href="#" class="d-block">{{session()->get('admin_name')}}</a>
+          <a href="/logout">Đăng xuất</a>
         </div>
       </div>
 
