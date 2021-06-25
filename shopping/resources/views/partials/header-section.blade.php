@@ -21,7 +21,7 @@
                                        
                                     </li>
                                     <li class="has-dropdown has-megaitem">
-                                        <a href="product-details-default.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                        <a>Sản phẩm <i class="fa fa-angle-down"></i></a>
                                         <!-- Mega Menu -->
                                         <div class="mega-menu">
                                             <ul class="mega-menu-inner">                                  
@@ -58,32 +58,29 @@
                                     </li>
                                     <li class="has-dropdown">
                                         <a href="/bai-viet">Bài viết</i></a>
-                                        <!-- Sub Menu -->
-                                        <!-- <ul class="sub-menu">
-                                            <li><a href="blog-grid-sidebar-left.html">Blog Grid Sidebar left</a></li>
-                                            <li><a href="blog-grid-sidebar-right.html">Blog Grid Sidebar Right</a></li>
-                                            <li><a href="blog-full-width.html">Blog Full Width</a></li>
-                                            <li><a href="blog-list-sidebar-left.html">Blog List Sidebar Left</a></li>
-                                            <li><a href="blog-list-sidebar-right.html">Blog List Sidebar Right</a></li>
-                                            <li><a href="blog-single-sidebar-left.html">Blog Single Sidebar left</a></li>
-                                            <li><a href="blog-single-sidebar-right.html">Blog Single Sidebar Right</a></li>
-                                        </ul> -->
+                                    
                                     </li>
-                                    <!-- <li class="has-dropdown">
-                                            <a href="#">Pages <i class="fa fa-angle-down"></i></a>
-                                            
-                                            <ul class="sub-menu">
-                                                <li><a href="faq.html">Frequently Questions</a></li>
-                                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                                <li><a href="404.html">404 Page</a></li>
-                                            </ul>
-                                        </li> -->
+                                    
                                     <li>
                                         <a href="/chinh-sach">Về chúng tôi</a>
                                     </li>
                                     <li>
                                         <a href="/lien-he">Liên hệ</a>
                                     </li>
+                                  
+                                    @if(Cookie::get('id'))
+                                    <li class="has-dropdown">
+                                        <a>Đơn hàng<i class="fa fa-angle-down"></i></a>
+                                        <!-- Sub Menu -->
+                                        <ul class="sub-menu">
+                                            <li><a href="/order-clients/0">Chờ xác nhận</a></li>
+                                            <li><a href="/order-clients/1">Chờ lấy hàng</a></li>
+                                            <li><a href="/order-clients/2">Đang giao hàng</a></li>
+                                            <li><a href="/order-clients/3">Đã giao hàng</a></li>
+
+                                        </ul>
+                                    </li>
+                                    @endif
                                 </ul>
                             </nav>
                         </div>
@@ -91,16 +88,18 @@
 
                         <!-- Start Header Action Link -->
                         <ul class="header-action-link action-color--black action-hover-color--golden">
-                            <li>
+                            <!-- <li>
                                 <a href="#offcanvas-wishlish" class="offcanvas-toggle">
                                     <i class="icon-heart"></i>
                                     <span class="item-count">3</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="#offcanvas-add-cart" class="offcanvas-toggle">
                                     <i class="icon-bag"></i>
-                                    <span class="item-count">3</span>
+                                    <span class="item-count">@if(Session::get('cart')){{count(Session::get('cart'))}}
+                                    @endif
+                                    @if(!Session::get('cart')) 0 @endif</span>
                                 </a>
                             </li>
                             <li>

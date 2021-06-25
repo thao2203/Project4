@@ -390,13 +390,14 @@
                         </div>
                     </div> 
                     <!-- Start Single Sidebar Widget -->
-                    <div class="sidebar-single-widget">
+                    <!-- <div class="sidebar-single-widget">
                         <div class="sidebar-content">
                             <a href="product-details-default.html" class="sidebar-banner img-hover-zoom">
                                 <img class="img-fluid" src="{{asset('assets/images/banner/side-banner.jpg')}}" alt="">
                             </a>
                         </div>
-                    </div> <!-- End Single Sidebar Widget -->
+                    </div> -->
+                     <!-- End Single Sidebar Widget -->
 
                 </div> <!-- End Sidebar Area -->
             </div>
@@ -420,7 +421,8 @@
                                                         </a>
                                                         <div class="action-link">
                                                             <div class="action-link-left">
-                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Thêm vào giỏ hàng</a>
+                                                            <button type="button" name="add-to-cart"  data-id="{{$product->id}}"class="btn add-to-cart">Thêm vào giỏ hàng</button>
+                                                                
                                                             </div>
                                                             <div class="action-link-right">
                                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>

@@ -36,17 +36,35 @@ class OrderController extends Controller
             ->where("guild_id",Cookie::get('id'))
             ->where("status",$status)
             ->get();
-        // $order_details = DB::table('order_details')
-        // ->join('orders','orders.id','=','order_details.orderID')
-        // ->where("guild_id",Cookie::get('id'))
-        // ->where("status",$status)
-        // ->orderBy('orders.created_at', 'desc')
-        // ->select('order_details.*','orders.*')
-        // ->get();
         return view('client.purchase', compact('orders','datas'));
     }
-
-   
+  
+   public function updateorder(Request $request)
+   {
+       if($request->arrayList)
+       {
+            foreach($request->arrayList as $k)
+            {
+                DB::table("order_details")->where("orderid",$k["orderid"])->delete();
+                break;
+            }
+            
+            foreach($request->arrayList as $ka)
+            {
+                DB::table("order_details")->insert([
+                    "orderID"=>$ka["orderid"],
+                    "productID"=> $ka["proid"],
+                    "quantity"=> $ka["qty"],
+                    "img_pro"=> $ka["img"],
+                    "name_pro"=> $ka["proname"],
+                    "sumPrice_pro"=>$ka["sum"]
+                ]);
+              
+            }
+        return $request;
+       }
+      
+   }
     public function getOrderDetail($id)
     {
         $datas = Category::where('parent_id', 0)->get(); 
@@ -69,6 +87,49 @@ class OrderController extends Controller
         ->update(["status"=>$request->status]);
         return $request;
     }
+    
+
+	public function edit($id)
+    {
+        $detail_orders = DB::table('order_details')
+        ->where('orderID',$id)
+        ->get();
+        $products = DB::table('products')
+        ->orderBy('created_at', 'desc')
+        ->get();
+    	return view('admin.order.edit',compact('detail_orders',"products",'id'));
+    }
+
+    
+    
+
+    // public function update($id, Request $request)
+    // {
+	// 	if (!$request->hasFile('feature_image_path')) {
+	// 		return "Mời chọn file cần upload";
+	// 	}
+	// 	$image = $request->file('feature_image_path');
+	// 	$storedPath = $image->move('images', $image->getClientOriginalName());
+    // 	$this->product->find($id)->update([
+    // 		'name' => $request->name,
+    // 		'category_id' => $request->category_id,
+	// 		'supplier_id'=>$request->supplier_id,
+	// 		'quantity'=>$request->quantity,
+    // 		'slug' => Str::slug($request->name),
+	// 		'content' => $request->content,
+	// 		'user_id' => 1,
+	// 		'feature_image_path'=> $storedPath->getFilename(),
+	// 		'price' => $request->price,
+    // 	]);
+    // 	return redirect()->route('product.index');
+    // }
+
+    // public function delete($id)
+    // {  	
+    // 	$this->product->find($id)->delete();
+    // 	return redirect()->route('product.index');
+    // }
+
     // public function getStatus($id)
     // {
    	// 	$data = DB::table('orders')
@@ -126,40 +187,5 @@ class OrderController extends Controller
     // 	$recusive = new Recusive($data);
     // 	$htmlOptionSupplier = $recusive->categoryRecusiveSupplier($supplierid);
     // 	return $htmlOptionSupplier;
-    // }
-
-	public function edit($id)
-    {
-        $detail_orders = DB::table('order_details')
-        ->where('orderID',$id)
-        ->get();
-    	return view('admin.order.edit',compact('detail_orders'));
-    }
-
-    // public function update($id, Request $request)
-    // {
-	// 	if (!$request->hasFile('feature_image_path')) {
-	// 		return "Mời chọn file cần upload";
-	// 	}
-	// 	$image = $request->file('feature_image_path');
-	// 	$storedPath = $image->move('images', $image->getClientOriginalName());
-    // 	$this->product->find($id)->update([
-    // 		'name' => $request->name,
-    // 		'category_id' => $request->category_id,
-	// 		'supplier_id'=>$request->supplier_id,
-	// 		'quantity'=>$request->quantity,
-    // 		'slug' => Str::slug($request->name),
-	// 		'content' => $request->content,
-	// 		'user_id' => 1,
-	// 		'feature_image_path'=> $storedPath->getFilename(),
-	// 		'price' => $request->price,
-    // 	]);
-    // 	return redirect()->route('product.index');
-    // }
-
-    // public function delete($id)
-    // {  	
-    // 	$this->product->find($id)->delete();
-    // 	return redirect()->route('product.index');
     // }
 }

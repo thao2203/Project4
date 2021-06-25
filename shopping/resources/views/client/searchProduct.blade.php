@@ -325,7 +325,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="breadcrumb-title"></h3>
+                    <h3 class="breadcrumb-title">Kết quả tìm kiếm</h3>
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>
@@ -344,11 +344,9 @@
 <div class="shop-section">
     <div class="container">
         <div class="row flex-column-reverse flex-lg-row">
-            <div class="col-lg-3">
-                <!-- Start Sidebar Area -->
+            <!-- <div class="col-lg-3">
                 <div class="siderbar-section" data-aos="fade-up" data-aos-delay="0">
 
-                    <!-- Start Single Sidebar Widget -->
                     <div class="sidebar-single-widget">
                         <h6 class="sidebar-title">Loại sản phẩm</h6>
                         <div class="sidebar-content">
@@ -360,16 +358,16 @@
                                             <div class="accordion">
                                                 <a href="/categories/{{$data->id}}" class="accordion-title collapsed">{{$data->name}}</a>
                                             </div>
-                                        </li> <!-- End Single Menu Collapse List -->
+                                        </li>
                                     </ul>
                                 </li>
                                 @endforeach
                             </ul>
                         </div>
 
-                    </div> <!-- End Single Sidebar Widget -->
+                    </div> 
 
-                    <!-- Start Single Sidebar Widget -->
+                   
                     <div class="sidebar-single-widget">
                         <h6 class="sidebar-title">BỘ LỌC THEO GIÁ</h6>
                         <div class="sidebar-content">
@@ -379,9 +377,9 @@
                                 <input type="text" id="amount">
                             </div>
                         </div>
-                    </div> <!-- End Single Sidebar Widget -->
+                    </div> 
 
-                    <!-- Start Single Sidebar Widget -->
+                   
                     <div class="sidebar-single-widget">
                         <h6 class="sidebar-title">NHÀ CUNG CẤP</h6>
                         <div class="sidebar-content">
@@ -394,27 +392,27 @@
                                                 <div class="accordion" style="text-align:justify;">
                                                     <a style="padding: 5px 0;font-weight: 400;" href="/categories-supplier/{{$supplier->id}}" class="accordion-title collapsed"><i style="margin-top: 18px;padding-right: 10px;" class="fas fa-parachute-box"></i>{{$supplier->name}}</a>
                                                 </div>
-                                            </li> <!-- End Single Menu Collapse List -->
+                                            </li> 
                                         </ul>
                                     </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
-                    </div> <!-- End Single Sidebar Widget -->
+                    </div> 
 
-                    <!-- Start Single Sidebar Widget -->
                     <div class="sidebar-single-widget">
                         <div class="sidebar-content">
                             <a href="product-details-default.html" class="sidebar-banner img-hover-zoom">
                                 <img class="img-fluid" src="{{asset('assets/images/banner/side-banner.jpg')}}" alt="">
                             </a>
                         </div>
-                    </div> <!-- End Single Sidebar Widget -->
+                    </div>
 
-                </div> <!-- End Sidebar Area -->
-            </div>
-            <div class="col-lg-9">
+                </div>
+            </div> -->
+            
+            <div class="col-lg-12">
                 <!-- Start Tab Wrapper -->
                 <div class="sort-product-tab-wrapper">
                     <div class="container">

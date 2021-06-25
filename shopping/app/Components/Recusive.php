@@ -107,39 +107,5 @@ class Recusive
 
 		return $this->htmlSelect;    				
     }
-// 	public function statusRecusive ($id)
-// 	{
-// 		foreach ($this->data as $value)
-// 		{
-// 			if($value['id'] == $id)
-// 			{
-// 				if($value['status'] == 0){
-// 					$this->htmlSelect .= "<option selected value='0'> Chờ xác nhận </option>";
-// 					$this->htmlSelect .= "<option value='1'> Đã xác nhận </option>";
-// 					$this->htmlSelect .= "<option value='2'> Đã giao hàng </option>";
-// 					$this->htmlSelect .= "<option value='3'> Đã thanh toán </option>";
-// 				}
-// 				elseif($value['status'] == 1){
-// 					$this->htmlSelect .= "<option value='0'> Chờ xác nhận </option>";
-// 					$this->htmlSelect .= "<option selected value='1'> Đã xác nhận </option>";
-// 					$this->htmlSelect .= "<option value='2'> Đã giao hàng </option>";
-// 					$this->htmlSelect .= "<option value='3'> Đã thanh toán </option>";
-// 				}
-// 				elseif($value['status'] == 2){
-// 					$this->htmlSelect .= "<option value='0'> Chờ xác nhận </option>";
-// 					$this->htmlSelect .= "<option value='1'> Đã xác nhận </option>";
-// 					$this->htmlSelect .= "<option selected value='2'> Đã giao hàng </option>";
-// 					$this->htmlSelect .= "<option value='3'> Đã thanh toán </option>";
-// 				}
-// 				else{
-// 					$this->htmlSelect .= "<option value='0'> Chờ xác nhận </option>";
-// 					$this->htmlSelect .= "<option value='1'> Đã xác nhận </option>";
-// 					$this->htmlSelect .= "<option value='2'> Đã giao hàng </option>";
-// 					$this->htmlSelect .= "<option selected value='3'> Đã thanh toán </option>";
-// 				}
-// 				$this->categoryRecusiveUpdate($id,$value['status']);
-// 			}
-			
-// 		}
-// 	}
+
  }

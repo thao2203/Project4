@@ -33,7 +33,7 @@
                                         <th>Hình ảnh</th>
                                         <th>Sản phẩm</th>
                                         <th>Số lượng</th>
-                                        <th>Đơn giá</th>
+                                        <th>Đơn giá (VNĐ)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +50,7 @@
                                         <td style="text-align: center!important;"><img style="width: 100px;" src="/images/{{$item->img_pro}}" alt=""></td>
                                         <td style="text-align: center;">{{$item->name_pro}}</td>
                                         <td style="text-align: center;">{{$item->quantity}} </td>
-                                        <td style="text-align: center;">{{ number_format($item->sumPrice_pro, 0)}} VNĐ</td>
+                                        <td style="text-align: center; color:brown;">{{ number_format($item->sumPrice_pro, 0)}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -65,7 +65,7 @@
                                     </tr>
                                     <tr class="order_total">
                                         <th colspan="3">Tổng đơn hàng cần thanh toán :</th>
-                                        <td colspan="3" style="text-align: end;"><strong>{{ number_format($total + 50000, 0)}} VNĐ</strong></td>
+                                        <td colspan="3" style="text-align: end; color:brown;"><strong>{{ number_format($total + 50000, 0)}} VNĐ</strong></td>
                                     </tr>
                                 </tfoot>
                             </table>

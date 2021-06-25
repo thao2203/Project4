@@ -45,7 +45,7 @@
         @endif
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped">
-            <thead>
+            <thead style=" text-align:center;">
               <tr>
                 <th>STT</th>
                 <th>Tiêu đề bài viết</th>
@@ -56,7 +56,7 @@
                 <th style="width: 12%;">Thao tác</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style=" text-align:center;">
               @foreach($blogs as $blog)
               <tr>
                 <td>{{ $loop->index+1 }}</td>
@@ -72,7 +72,7 @@
               </tr>
               @endforeach
             </tbody>
-            <tfoot>
+            <tfoot style=" text-align:center;">
               <tr>
                 <th>STT</th>
                 <th>Tiêu đề bài viết</th>

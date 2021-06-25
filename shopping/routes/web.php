@@ -13,13 +13,19 @@ use Illuminate\Support\Facades\Session;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post("/update-order-post",'App\Http\Controllers\OrderController@updateorder')->middleware("login");
+
 Route::get('/', action:'App\Http\Controllers\HomeController@index');
-Route::get('clientsearch/{?key}', 'App\Http\Controllers\HomeController@search');
-Route::get('blogSearch/{?key}', 'App\Http\Controllers\HomeController@blogSearch');
+Route::get('clientsearch/{key}', 'App\Http\Controllers\HomeController@search');
+Route::get('blogSearch/{key}', 'App\Http\Controllers\HomeController@blogSearch');
 Route::get('/order-clients/{status}', 'App\Http\Controllers\OrderController@getOrderList');
 Route::get('/chi-tiet-don-hang/{id}', 'App\Http\Controllers\OrderController@getOrderDetail');
 
+Route::get('cartContent',function(){
+	return Session::get('cart') ;	
+});
 Route::post('/sua-trang-thai', 'App\Http\Controllers\OrderController@updateStatus');
+Route::post('/sua-so-luong', 'App\Http\Controllers\OrderController@updateQuantity');
 
 Route::get('admin', 'App\Http\Controllers\AdminController@loginAdmin')->middleware("loginnow");
 
@@ -28,14 +34,13 @@ Route::post('admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
 Route::get('authlogin', 'App\Http\Controllers\HomeController@getAuthLogin');
 Route::post('authlogin', 'App\Http\Controllers\HomeController@postAuthLogin');
 
-
-
 Route::get('detail/{id}', 'App\Http\Controllers\HomeController@detail');
 
 Route::get('categories/{id}', 'App\Http\Controllers\HomeController@category');
 Route::get('categories-supplier/{id}/{sup_id}', 'App\Http\Controllers\HomeController@category_supplier');
 
 Route::get('/chinh-sach', 'App\Http\Controllers\HomeController@aboutUs');
+Route::get('/lien-he', 'App\Http\Controllers\HomeController@contactUs');
 
 Route::get('/bai-viet', 'App\Http\Controllers\HomeController@blog');
 Route::get("/logout",function(){
@@ -60,7 +65,8 @@ Route::get('/del-all-product', 'App\Http\Controllers\CartController@delete_all_p
 
 Route::get('/chi-tiet-gio-hang', 'App\Http\Controllers\CartController@chiTietGioHang');
 
-Route::get('/thanh-toan', 'App\Http\Controllers\CartController@thanhToan');
+Route::get('/thanh-toan', 'App\Http\Controllers\CartController@thanhToan')->middleware("ck");
+
 
 // Counpon /check-coupon
 Route::post('/check-coupon', 'App\Http\Controllers\CartController@check_coupon');

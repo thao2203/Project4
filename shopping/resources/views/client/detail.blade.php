@@ -603,9 +603,9 @@
                         <!-- <li><a class="nav-link" data-bs-toggle="tab" href="#specification">
                                 Chi tiết
                             </a></li> -->
-                        <li><a class="nav-link" data-bs-toggle="tab" href="#review">
+                        <!-- <li><a class="nav-link" data-bs-toggle="tab" href="#review">
                                 Bình luận
-                            </a></li>
+                            </a></li> -->
                     </ul> <!-- End Product Details Tab Button -->
 
                     <!-- Start Product Details Tab Content -->

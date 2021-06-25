@@ -233,6 +233,7 @@ class CartController extends Controller
     {
        
         $data = Session::get('cart');
+        
         if ($data) {
             $order = new Order();
             $order->name = $request->name;           
@@ -254,10 +255,10 @@ class CartController extends Controller
                     'quantity' => $item['product_count'],
                     'img_pro' => $item['product_img'],
                     'name_pro' => $item['product_name'],
-                    'sumPrice_pro' => $item['product_price']*$item['product_count']
+                    'sumPrice_pro' => $item['product_price']*90/100*$item['product_count']
                 ]);
                
-                $totalMoney = $totalMoney + ((int)$item['product_price'] * (int)$item['product_count']);
+                $totalMoney = $totalMoney + ((int)$item['product_price']*90/100 * (int)$item['product_count']);
             }
             $this->order->find($order->id)->update([
                 'total' => $totalMoney

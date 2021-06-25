@@ -45,7 +45,7 @@
         @endif
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped">
-            <thead>
+            <thead style=" text-align:center;">
               <tr>
                 <th>STT</th>
                 <th>Tên sản phẩm</th>
@@ -56,12 +56,12 @@
                 <th style="width: 12%;">Thao tác</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style=" text-align:center;">
               @foreach($products as $product)
               <tr>
                 <td>{{ $loop->index+1 }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ number_format($product->price, 0) }}</td>
+                <td style="color: brown; font-size: 20px!important;">{{ number_format($product->price, 0) }}</td>
                 <td><img src="{{url('/images/'.$product->feature_image_path)}}" style="width:100px;height:150px" alt=""></td>
                 <td>{{ $product->quantity }}</td>
                 <td>{{ date("d-m-Y", strtotime($product->created_at)) }}</td>
@@ -72,7 +72,7 @@
               </tr>
               @endforeach
             </tbody>
-            <tfoot>
+            <tfoot style=" text-align:center;">
               <tr>
                 <th>STT</th>
                 <th>Tên sản phẩm</th>

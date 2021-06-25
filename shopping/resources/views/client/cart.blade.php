@@ -393,13 +393,13 @@
 
                                         <!-- Start Cart Single Item-->
                                         @php
-                                        $total = 0;
+                                            $total = 0;
                                         @endphp
                                       
                                         @foreach(Session::get('cart') as $item)
                                         @php
-                                        $subtotal = (integer)$item['product_price']*(integer)$item['product_count'];
-                                        $total += $subtotal;
+                                            $subtotal = (integer)$item['product_price']*(integer)$item['product_count'];
+                                            $total += $subtotal;
                                         @endphp
 
 
@@ -409,7 +409,7 @@
                                             <td class="product_name"><a href="/detail/{{ $item['product_id']}}">{{$item['product_name']}}</a></td>
                                             <td class="product-price">{{number_format($item['product_price'], 0)}}</td>
                                             <td class="product_quantity"><label>Số lượng</label> <input min="1" name="cart_qty[{{$item['session_id']}}]" value="{{$item['product_count']}}" type="number"></td>
-                                            <td class="product_total">{{ number_format($subtotal, 0)}}</td>
+                                            <td style="color: red;" class="product_total">{{ number_format($subtotal, 0)}}</td>
 
                                         </tr>
                                         @endforeach
@@ -458,8 +458,8 @@
                                 <a href="#">Tính toán vận chuyển</a>
 
                                 <div class="cart_subtotal">
-                                    <p>Tổng tiền thanh toán:</p>
-                                    <p class="cart_amount">{{ number_format($total + 50000, 0)}} VNĐ</p>
+                                    <p style="color: red;">Tổng tiền thanh toán:</p>
+                                    <p style="color: red;" class="cart_amount">{{ number_format($total + 50000, 0)}} VNĐ</p>
                                 </div>
                                 <div class="checkout_btn">
                                     <a href="/thanh-toan" class="btn btn-md btn-golden">Tiến hành kiểm tra</a>

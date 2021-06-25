@@ -40,7 +40,7 @@
         @endif
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped">
-            <thead>
+            <thead style=" text-align:center;">
               <tr>
                 <th>STT</th>
                 <th>Chủ đơn hàng</th>
@@ -50,7 +50,7 @@
                 <th style="width: 12%;">Thao tác</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style=" text-align:center;">
               @foreach($orders as $order)
 
               <tr>
@@ -70,7 +70,7 @@
                 <td>
                   <a href="{{ route('order.detail',['id' => $order->id]) }}" style="color:white;margin-bottom: 5px;" class="btn btn-sm btn-warning">Xem chi tiết</a>
                   <a href="{{ route('order.edit',['id' => $order->id]) }}" class="btn btn-sm btn-success">Sửa</a>
-                  <a href="" class="btn btn-sm btn-danger" style="margin-left: 3px;">Xóa</a>
+                  <a href="" class="btn btn-sm btn-danger" style="margin-left: 8px;">Xóa</a>
                 </td>
                 @elseif($order->status==1)
                 <td>
@@ -82,9 +82,9 @@
                   </select>
                 </td>
                 <td>
-                  <a href="{{ route('order.detail',['id' => $order->id]) }}" class="btn btn-sm btn-default">Xem chi tiết</a>
+                  <a href="{{ route('order.detail',['id' => $order->id]) }}" style="color:white;margin-bottom: 5px;"  class="btn btn-sm btn-warning">Xem chi tiết</a>
                   <a href="{{ route('order.edit',['id' => $order->id]) }}" class="btn btn-sm btn-success">Sửa</a>
-                  <a href="" class="btn btn-sm btn-danger">Xóa</a>
+                  <a href="" class="btn btn-sm btn-danger" style="margin-left: 8px;">Xóa</a>
                 </td>
                 @elseif($order->status==2)
                 <td>
@@ -96,7 +96,7 @@
                   </select>
                 </td>
                 <td>
-                  <a href="{{ route('order.detail',['id' => $order->id]) }}" class="btn btn-sm btn-default">Xem chi tiết</a>
+                  <a href="{{ route('order.detail',['id' => $order->id]) }}" style="color:white;"  class="btn btn-sm btn-warning">Xem chi tiết</a>
                 </td>
                 @elseif($order->status==3)
                 <td>
@@ -108,14 +108,14 @@
                   </select>
                 </td>
                 <td>
-                  <a href="{{ route('order.detail',['id' => $order->id]) }}" class="btn btn-sm btn-default">Xem chi tiết</a>
+                  <a href="{{ route('order.detail',['id' => $order->id]) }}" style="color:white;"  class="btn btn-sm btn-warning">Xem chi tiết</a>
                 </td>
                 @endif
 
               </tr>
               @endforeach
             </tbody>
-            <tfoot>
+            <tfoot style=" text-align:center;">
               <tr>
                 <th>STT</th>
                 <th>Tên hóa đơn</th>

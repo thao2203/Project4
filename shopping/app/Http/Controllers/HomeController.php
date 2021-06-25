@@ -85,7 +85,7 @@ class HomeController extends Controller
             $allcate = DB::table('categories')
             ->select('categories.id','categories.name')
             ->get();
-            $datapro=DB::table("products")
+        $datapro=DB::table("products")
             ->where("name","like","%".$key."%")->select("*")
             ->paginate(12);
               
@@ -110,7 +110,7 @@ class HomeController extends Controller
             ->select('products.*', 'categories.name as cate_name')
             ->paginate(12);
         
-            $datas = $this->category->all();//Lấy ra tất cả các data
+        $datas = $this->category->all();//Lấy ra tất cả các data
     	$recusive = new Recusive($datas);
     	$htmlOption = $recusive->categoryRecusiveUpdatewithlink(0);
     	

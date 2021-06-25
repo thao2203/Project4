@@ -429,7 +429,7 @@
     $("#slider-range").slider({
         range: true,
         min: 0,
-        max: 50000000,
+        max: 10000000,
         step: 50000,
         values: [500000, 5000000],
         slide: function(event, ui) {
@@ -438,10 +438,9 @@
             // console.log($(".product-default-single-item").parents().eq(1))
             $(".product_here").each(function() {
               
-                    if($(this).attr("price")>ui.values[0]&&$(this).attr("price")<ui.values[1])
-                    {
-                            $(this).show();
-                    }
+                if ($(this).attr("price") > ui.values[0] && $(this).attr("price") < ui.values[1]) {
+                    $(this).show();
+                }
             });
     
         }
